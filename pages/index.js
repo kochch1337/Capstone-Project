@@ -6,11 +6,19 @@ export default function Solution() {
   const { data, error } = useSWR(apiUrl, fakeFetcher);
 
   if (error) {
-    return <h1>Data could not be fetched</h1>;
+    return (
+      <main>
+        <h1>Data could not be fetched</h1>
+      </main>
+    );
   }
 
   if (!data) {
-    return <h1>loading</h1>;
+    return (
+      <main>
+        <h1>loading</h1>;
+      </main>
+    );
   }
 
   return (
