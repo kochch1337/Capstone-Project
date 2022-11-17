@@ -1,9 +1,8 @@
 import { fakeFetcher } from "../helpers/api";
 import useSWR from "swr";
-const apiUrl = "/api/data";
 
 export default function Solution() {
-  const { data, error } = useSWR(apiUrl, fakeFetcher);
+  const { data, error } = useSWR("/api/data", fakeFetcher);
 
   if (error) {
     return (
