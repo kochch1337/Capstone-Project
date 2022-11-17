@@ -12,14 +12,15 @@ export default function Solution() {
   if (!data) {
     return <h1>loading</h1>;
   }
+
   return (
-    <>
+    <main>
       <h1>Solutions</h1>
       <ul>
-        {data?.map((solution) => {
-          return <li key={solution.Id}>{solution.Solution}</li>;
+        {data.map((solution) => {
+          return <li key={solution.solution_Id}>{solution.solution}</li>;
         })}
       </ul>
-    </>
+    </main>
   );
 }
