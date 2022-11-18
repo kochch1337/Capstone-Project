@@ -1,286 +1,419 @@
 const data = [
   {
-    Id: "1",
-    Solution: "Einkauf",
-    Team: "AA",
-    BPE: "Sebastian Brucker",
-    BSEINT: "Jochen Maier",
-    BSEGR: "Helmut Schön",
-    LeadDevloper: "Veit Maurer",
-    CBO: "Ahmet Peros",
-    SupportGroup: "supp-einkauf",
-    Modules: [
+    solution_Id: "1",
+    solution: "Einkauf",
+    team: "AA",
+    bpe: {
+      personal_Id: "9",
+      firstname: "Sebastian",
+      lastname: "Brucker",
+      role: "bc",
+    },
+    bseint: {
+      personal_Id: "10",
+      firstname: "Jochen",
+      lastname: "Maier",
+      role: "bc",
+    },
+    bsegr: {
+      personal_Id: "11",
+      firstname: "Helmut",
+      lastname: "Schön",
+      role: "bc",
+    },
+    leadDevloper: {
+      personal_Id: "12",
+      firstname: "Veit",
+      lastname: "Maurer",
+      role: "dev",
+    },
+    cbo: {
+      personal_Id: "13",
+      firstname: "Ahmet",
+      lastname: "Peros",
+      role: "bc",
+    },
+    supportGroup: "supp-einkauf",
+    modules: [
       {
-        Modul: "ABC",
-        Developers: [
+        modul: "ABC",
+        developers: [
           {
-            DevloperId: "1",
-            Firstname: "Thomas",
-            Lastanme: "Müller",
+            personal_Id: "1",
+            firstname: "Thomas",
+            lastname: "Müller",
+            role: "dev",
           },
           {
-            DeveloperId: "2",
-            Firstname: "Jarno",
-            Lastanme: "Recklinghausen",
+            personal_Id: "2",
+            firstname: "Jarno",
+            lastname: "Recklinghausen",
+            role: "dev",
           },
         ],
-        BPA: [
+        bpa: [
           {
-            BpaId: "1",
-            Firstname: "Reiko",
-            Lastanme: "Mann",
+            personal_Id: "5",
+            firstname: "Reiko",
+            lastname: "Mann",
+            role: "bc",
           },
           {
-            BpaId: "2",
-            Firstname: "Carmen",
-            Lastanme: "Müller",
+            personal_Id: "6",
+            firstname: "Carmen",
+            lastname: "Müller",
+            role: "bc",
           },
         ],
       },
       {
-        Modul: "AFK",
-        Developer: [
+        modul: "AFK",
+        developer: [
           {
-            DevloperId: "1",
-            Firstname: "Thomas",
-            Lastanme: "Müller",
+            personal_Id: "1",
+            firstname: "Thomas",
+            lastname: "Müller",
+            role: "dev",
           },
           {
-            DeveloperId: "3",
-            Firstname: "Simone",
-            Lastanme: "Winterberg",
-          },
-        ],
-        BPA: [
-          {
-            BpaId: "1",
-            Firstname: "Reiko",
-            Lastanme: "Mann",
-          },
-          {
-            BpaId: "3",
-            Firstname: "Laura",
-            Lastanme: "Hammer",
+            personal_Id: "3",
+            firstname: "Simone",
+            lastname: "Winterberg",
+            role: "dev",
           },
         ],
-      },
-      {
-        Modul: "WTF",
-        Developer: [
+        bpa: [
           {
-            DevloperId: "4",
-            Firstname: "Andrea",
-            Lastanme: "See",
+            personal_Id: "5",
+            firstname: "Reiko",
+            lastname: "Mann",
+            role: "bc",
           },
           {
-            DeveloperId: "3",
-            Firstname: "Simone",
-            Lastanme: "Winterberg",
-          },
-        ],
-        BPA: [
-          {
-            BpaId: "3",
-            Firstname: "Laura",
-            Lastanme: "Hammer",
-          },
-          {
-            BpaId: "4",
-            Firstname: "Thorsten",
-            Lastanme: "Kurz",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    Id: "2",
-    Solution: "Controlling",
-    Team: "TX",
-    BPE: "Tom Heinrich",
-    BSEINT: "Reiko Carlson",
-    BSEGR: "Maria Angstmann",
-    LeadDevloper: "Stefan Hirtel",
-    CBO: "August Keller",
-    SupportGroup: "supp-controlling",
-    Modules: [
-      {
-        Modul: "TTC",
-        Developers: [
-          {
-            DevloperId: "1",
-            Firstname: "Thomas",
-            Lastanme: "Müller",
-          },
-        ],
-        BPA: [
-          {
-            BpaId: "1",
-            Firstname: "Reiko",
-            Lastanme: "Mann",
+            personal_Id: "7",
+            firstname: "Laura",
+            lastname: "Hammer",
+            role: "bc",
           },
         ],
       },
       {
-        Modul: "KKS",
-        Developer: [
+        modul: "WTF",
+        developer: [
           {
-            DevloperId: "1",
-            Firstname: "Thomas",
-            Lastanme: "Müller",
+            personal_Id: "4",
+            firstname: "Andrea",
+            lastname: "See",
+            role: "dev",
           },
           {
-            DeveloperId: "2",
-            Firstname: "Jarno",
-            Lastanme: "Recklinghausen",
-          },
-          {
-            DeveloperId: "3",
-            Firstname: "Simone",
-            Lastanme: "Winterberg",
+            personal_Id: "3",
+            firstname: "Simone",
+            lastname: "Winterberg",
+            role: "dev",
           },
         ],
-        BPA: [
+        bpa: [
           {
-            BpaId: "1",
-            Firstname: "Reiko",
-            Lastanme: "Mann",
+            personal_Id: "7",
+            firstname: "Laura",
+            lastname: "Hammer",
+            role: "bc",
           },
           {
-            BpaId: "3",
-            Firstname: "Laura",
-            Lastanme: "Hammer",
-          },
-          {
-            BpaId: "4",
-            Firstname: "Thorsten",
-            Lastanme: "Kurz",
-          },
-        ],
-      },
-      {
-        Modul: "AXX",
-        Developer: [
-          {
-            DevloperId: "4",
-            Firstname: "Andrea",
-            Lastanme: "See",
-          },
-          {
-            DeveloperId: "3",
-            Firstname: "Simone",
-            Lastanme: "Winterberg",
-          },
-        ],
-        BPA: [
-          {
-            BpaId: "4",
-            Firstname: "Thorsten",
-            Lastanme: "Kurz",
+            personal_Id: "8",
+            firstname: "Thorsten",
+            lastname: "Kurz",
+            role: "bc",
           },
         ],
       },
     ],
   },
   {
-    Id: "3",
-    Solution: "Verkauf",
-    Team: "AA",
-    BPE: "Heidrung Maier",
-    BSEINT: "Andrea Meier",
-    BSEGR: "Diana Carosi",
-    LeadDevloper: "Luka Ambrosios",
-    CBO: "Serkan Turhan",
-    SupportGroup: "supp-verkauf",
-    Modules: [
+    solution_Id: "2",
+    solution: "Controlling",
+    team: "TX",
+    bpe: {
+      personal_Id: "14",
+      firstname: "Tom",
+      lastname: "Heinrich",
+      role: "bc",
+    },
+    bseint: {
+      personal_Id: "15",
+      firstname: "Reiko",
+      lastname: "Carlsen",
+      role: "bc",
+    },
+    bsegr: {
+      personal_Id: "16",
+      firstname: "Maria",
+      lastname: "Angstmann",
+      role: "bc",
+    },
+    leadDevloper: {
+      personal_Id: "17",
+      firstname: "Stefan",
+      lastname: "Hirtel",
+      role: "dev",
+    },
+    cbo: {
+      personal_Id: "18",
+      firstname: "August",
+      lastname: "Keller",
+      role: "bc",
+    },
+    supportGroup: "supp-controlling",
+    modules: [
       {
-        Modul: "DKP",
-        Developers: [
+        modul: "TTC",
+        developers: [
           {
-            DeveloperId: "2",
-            Firstname: "Jarno",
-            Lastanme: "Recklinghausen",
+            personal_Id: "1",
+            firstname: "Thomas",
+            lastname: "Müller",
+            role: "dev",
           },
         ],
-        BPA: [
+        bpa: [
           {
-            BpaId: "2",
-            Firstname: "Carmen",
-            Lastanme: "Müller",
+            personal_Id: "5",
+            firstname: "Reiko",
+            lastname: "Mann",
+            role: "bc",
           },
         ],
       },
       {
-        Modul: "WIB",
-        Developer: [
+        modul: "KKS",
+        developer: [
           {
-            DeveloperId: "3",
-            Firstname: "Simone",
-            Lastanme: "Winterberg",
+            personal_Id: "1",
+            firstname: "Thomas",
+            lastname: "Müller",
+            role: "dev",
+          },
+          {
+            personal_Id: "2",
+            firstname: "Jarno",
+            lastname: "Recklinghausen",
+            role: "dev",
+          },
+          {
+            personal_Id: "3",
+            firstname: "Simone",
+            lastname: "Winterberg",
+            role: "dev",
           },
         ],
-        BPA: [
+        bpa: [
           {
-            BpaId: "3",
-            Firstname: "Laura",
-            Lastanme: "Hammer",
+            personal_Id: "5",
+            firstname: "Reiko",
+            lastname: "Mann",
+            role: "bc",
+          },
+          {
+            personal_Id: "7",
+            firstname: "Laura",
+            lastname: "Hammer",
+            role: "bc",
+          },
+          {
+            personal_Id: "8",
+            firstname: "Thorsten",
+            lastname: "Kurz",
+            role: "bc",
           },
         ],
       },
       {
-        Modul: "XML",
-        Developer: [
+        modul: "AXX",
+        developer: [
           {
-            DevloperId: "4",
-            Firstname: "Andrea",
-            Lastanme: "See",
+            personal_Id: "4",
+            firstname: "Andrea",
+            lastname: "See",
+            role: "dev",
           },
           {
-            DeveloperId: "3",
-            Firstname: "Simone",
-            Lastanme: "Winterberg",
+            personal_Id: "3",
+            firstname: "Simone",
+            lastname: "Winterberg",
+            role: "dev",
           },
         ],
-        BPA: [
+        bpa: [
           {
-            BpaId: "3",
-            Firstname: "Laura",
-            Lastanme: "Hammer",
-          },
-          {
-            BpaId: "4",
-            Firstname: "Thorsten",
-            Lastanme: "Kurz",
+            personal_Id: "8",
+            firstname: "Thorsten",
+            lastname: "Kurz",
+            role: "bc",
           },
         ],
       },
     ],
   },
   {
-    Id: "4",
-    Solution: "Verwaltung",
-    Team: "AA",
-    BPE: "Sebastian Brucker",
-    BSEINT: "Reiko Carlsen",
-    BSEGR: "Diana Carosi",
-    LeadDevloper: "Sergej Seehl",
-    CBO: "Thomas Bauernfeind",
-    SupportGroup: "supp-verwaltung",
-    Modules: [
+    solution_Id: "3",
+    solution: "Verkauf",
+    team: "AA",
+    bpe: {
+      personal_Id: "19",
+      firstname: "Heidrun",
+      lastname: "Maier",
+      role: "bc",
+    },
+    bseint: {
+      personal_Id: "20",
+      firstname: "Andrea",
+      lastname: "Meier",
+      role: "bc",
+    },
+    bsegr: {
+      personal_Id: "21",
+      firstname: "Diana",
+      lastname: "Carosi",
+      role: "bc",
+    },
+    leadDevloper: {
+      personal_Id: "22",
+      firstname: "Luka",
+      lastname: "Ambrosius",
+      role: "dev",
+    },
+    cbo: {
+      personal_Id: "23",
+      firstname: "Serkan",
+      lastname: "Turhan",
+      role: "bc",
+    },
+    supportGroup: "supp-verkauf",
+    modules: [
       {
-        Modul: "NHC",
-        Developers: [
+        modul: "DKP",
+        developers: [
           {
-            DeveloperId: "3",
-            Firstname: "Simone",
-            Lastanme: "Winterberg",
+            personal_Id: "2",
+            firstname: "Jarno",
+            lastname: "Recklinghausen",
+            role: "dev",
           },
         ],
-        BPA: [
+        bpa: [
           {
-            BpaId: "3",
-            Firstname: "Laura",
-            Lastanme: "Hammer",
+            personal_Id: "6",
+            firstname: "Carmen",
+            lastname: "Müller",
+            role: "bc",
+          },
+        ],
+      },
+      {
+        modul: "WIB",
+        developer: [
+          {
+            personal_Id: "3",
+            firstname: "Simone",
+            lastname: "Winterberg",
+            role: "dev",
+          },
+        ],
+        bpa: [
+          {
+            personal_Id: "7",
+            firstname: "Laura",
+            lastname: "Hammer",
+            role: "bc",
+          },
+        ],
+      },
+      {
+        modul: "XML",
+        developer: [
+          {
+            personal_Id: "4",
+            firstname: "Andrea",
+            lastname: "See",
+            role: "dev",
+          },
+          {
+            personal_Id: "3",
+            firstname: "Simone",
+            lastname: "Winterberg",
+            role: "dev",
+          },
+        ],
+        bpa: [
+          {
+            personal_Id: "7",
+            firstname: "Laura",
+            lastname: "Hammer",
+            role: "bc",
+          },
+          {
+            personal_Id: "8",
+            firstname: "Thorsten",
+            lastname: "Kurz",
+            role: "bc",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    solution_Id: "4",
+    solution: "Verwaltung",
+    team: "AA",
+    bpe: {
+      personal_Id: "9",
+      firstname: "Sebastian",
+      lastname: "Brucker",
+      role: "bc",
+    },
+    bseint: {
+      personal_Id: "15",
+      firstname: "Reiko",
+      lastname: "Carlsen",
+      role: "bc",
+    },
+    bsegr: {
+      personal_Id: "21",
+      firstname: "Diana",
+      lastname: "Carosi",
+      role: "bc",
+    },
+    leadDevloper: {
+      personal_Id: "24",
+      firstname: "Sergej",
+      lastname: "Seehl",
+      role: "dev",
+    },
+    cbo: {
+      personal_Id: "25",
+      firstname: "Thomas",
+      lastname: "Bauernfeind",
+      role: "bc",
+    },
+    supportGroup: "supp-verwaltung",
+    modules: [
+      {
+        modul: "NHC",
+        developers: [
+          {
+            personal_Id: "3",
+            firstname: "Simone",
+            lastname: "Winterberg",
+            role: "dev",
+          },
+        ],
+        bpa: [
+          {
+            personal_Id: "7",
+            firstname: "Laura",
+            lastname: "Hammer",
+            role: "bc",
           },
         ],
       },
@@ -292,30 +425,16 @@ function getAllData() {
   return data;
 }
 
-function getDataById(id) {
-  return data.find((solution) => solution.id === id);
-}
-
-const hostname = "http://localhost:3000/";
-
-function fetcher(url) {
-  if (!url) return;
-
-  return fetch(hostname + url).then((res) => res.json());
-}
-
 function fakeFetcher(url) {
   if (!url) return;
 
   switch (true) {
     case "/api/data" === url:
       return getAllData();
-    case url?.startsWith("/api/data/"):
-      return getDataById(url.split("/").at(-1));
     default:
       throw new Error("unmapped request");
   }
 }
 
 export default data;
-export { getAllData, fetcher, fakeFetcher };
+export { getAllData, fakeFetcher };
