@@ -36,8 +36,8 @@ const data = [
     supportGroup: "supp-einkauf",
     modules: [
       {
-        modul: "ABC",
-        developers: [
+        module: "ABC",
+        developer: [
           {
             personal_Id: "1",
             firstname: "Thomas",
@@ -67,7 +67,7 @@ const data = [
         ],
       },
       {
-        modul: "AFK",
+        module: "AFK",
         developer: [
           {
             personal_Id: "1",
@@ -98,7 +98,7 @@ const data = [
         ],
       },
       {
-        modul: "WTF",
+        module: "WTF",
         developer: [
           {
             personal_Id: "4",
@@ -167,8 +167,8 @@ const data = [
     supportGroup: "supp-controlling",
     modules: [
       {
-        modul: "TTC",
-        developers: [
+        module: "TTC",
+        developer: [
           {
             personal_Id: "1",
             firstname: "Thomas",
@@ -186,7 +186,7 @@ const data = [
         ],
       },
       {
-        modul: "KKS",
+        module: "KKS",
         developer: [
           {
             personal_Id: "1",
@@ -229,7 +229,7 @@ const data = [
         ],
       },
       {
-        modul: "AXX",
+        module: "AXX",
         developer: [
           {
             personal_Id: "4",
@@ -292,8 +292,8 @@ const data = [
     supportGroup: "supp-verkauf",
     modules: [
       {
-        modul: "DKP",
-        developers: [
+        module: "DKP",
+        developer: [
           {
             personal_Id: "2",
             firstname: "Jarno",
@@ -311,7 +311,7 @@ const data = [
         ],
       },
       {
-        modul: "WIB",
+        module: "WIB",
         developer: [
           {
             personal_Id: "3",
@@ -330,7 +330,7 @@ const data = [
         ],
       },
       {
-        modul: "XML",
+        module: "XML",
         developer: [
           {
             personal_Id: "4",
@@ -399,8 +399,8 @@ const data = [
     supportGroup: "supp-verwaltung",
     modules: [
       {
-        modul: "NHC",
-        developers: [
+        module: "NHC",
+        developer: [
           {
             personal_Id: "3",
             firstname: "Simone",
