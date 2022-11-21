@@ -1,10 +1,23 @@
 import GlobalStyles from "../components/GlobalStyles";
+import Layout from "../components/Layout";
+import { useLocalStorage } from "../helpers/hooks";
+import data from "../helpers/api";
+import persons from "../helpers/persons";
 
 function MyApp({ Component, pageProps }) {
+  const [mainData, setMainData] = useLocalStorage("mainData", data);
+  const [personsData, setPersonsData] = useLocalStorage("personsData", persons);
+
   return (
     <>
       <GlobalStyles />
-      <Component {...pageProps} />
+      <Layout>
+        <Component
+          {...pageProps}
+          mainData={mainData}
+          personsData={personsData}
+        />
+      </Layout>
     </>
   );
 }
