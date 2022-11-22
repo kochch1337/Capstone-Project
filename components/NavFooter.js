@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useRouter } from "next/router.js";
-import Link from "next/link";
+import Link from "next/link.js";
 
 export default function NavFooter() {
   const { pathname } = useRouter();
@@ -85,7 +85,6 @@ const StyledNavLink = styled.a`
   width: 100%;
   height: 100%;
   positon: center;
-
   background: ${({ active }) => (active ? activeColor : transparentColor)};
 
   &:hover {

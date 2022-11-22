@@ -10,7 +10,7 @@ export default function Layout({ children }) {
   );
 }
 
-const PageWrapper = styled.main`
+const PageWrapper = styled.div`
   padding: 1.5rem;
   padding-bottom: 5%;
 `;
