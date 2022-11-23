@@ -21,7 +21,7 @@ const data = [
       lastname: "Schön",
       role: "bc",
     },
-    leadDevloper: {
+    leadDeveloper: {
       personal_Id: "12",
       firstname: "Veit",
       lastname: "Maurer",
@@ -152,7 +152,7 @@ const data = [
       lastname: "Angstmann",
       role: "bc",
     },
-    leadDevloper: {
+    leadDeveloper: {
       personal_Id: "17",
       firstname: "Stefan",
       lastname: "Hirtel",
@@ -277,7 +277,7 @@ const data = [
       lastname: "Carosi",
       role: "bc",
     },
-    leadDevloper: {
+    leadDeveloper: {
       personal_Id: "22",
       firstname: "Luka",
       lastname: "Ambrosius",
@@ -384,7 +384,7 @@ const data = [
       lastname: "Carosi",
       role: "bc",
     },
-    leadDevloper: {
+    leadDeveloper: {
       personal_Id: "24",
       firstname: "Sergej",
       lastname: "Seehl",

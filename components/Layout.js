@@ -11,6 +11,10 @@ export default function Layout({ children }) {
 }
 
 const PageWrapper = styled.main`
-  padding: 1.5rem;
+  padding: 5px 5px 10% 5px;
   padding-bottom: 5%;
+
+  @media (min-width: 769px) {
+    width: 768px;
+  }
 `;

@@ -1,29 +1,29 @@
 import Link from "next/link";
+import styled from "styled-components";
 import { useRouter } from "next/router.js";
+import SolutionInfo from "../components/SolutionInfo";
 
 export default function Solution({ mainData }) {
   const router = useRouter();
 
   return (
     <>
-      <h1>Solutions</h1>
-      <ul>
+      <StyledHeader>Solutions</StyledHeader>
+      <StyledListContainer>
         {mainData.map((solution) => {
           return (
-            <li key={solution.solution_Id}>
-              <Link
-                href={{
-                  pathname: "/Modules",
-                  query: { SolutionId: solution.solution_Id },
-                }}
-                passHref
-              >
-                {solution.solution}
-              </Link>
-            </li>
+            <SolutionInfo key={solution.solution_Id} solution={solution} />
           );
         })}
-      </ul>
+      </StyledListContainer>
     </>
   );
 }
+
+const StyledListContainer = styled.ul`
+  padding 5px 5px 10% 5px
+`;
+
+const StyledHeader = styled.h1`
+  font-color: red;
+`;
