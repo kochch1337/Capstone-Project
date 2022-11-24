@@ -10,9 +10,6 @@ export default function ModuleInfo({ solution, module }) {
             <Link
               href={{
                 pathname: "/",
-                /* query: {
-                  SolutionId: solution.solution_Id,
-                }, */
               }}
               passHref
             >
