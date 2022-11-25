@@ -1,11 +1,14 @@
 import styled from "styled-components";
-import NavFooter from "./NavFooter";
+import NavFooter from "../NavFooter";
+import Theme from "../../Theme";
 
 export default function Layout({ children }) {
   return (
     <>
-      <PageWrapper>{children}</PageWrapper>
-      <NavFooter />
+      <Theme>
+        <PageWrapper>{children}</PageWrapper>
+        <NavFooter />
+      </Theme>
     </>
   );
 }

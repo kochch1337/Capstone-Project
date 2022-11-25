@@ -15,7 +15,9 @@ function MyApp({ Component, pageProps }) {
         <Component
           {...pageProps}
           mainData={mainData}
+          setMainData={setMainData}
           personsData={personsData}
+          setPersonsData={setPersonsData}
         />
       </Layout>
     </>

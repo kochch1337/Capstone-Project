@@ -1,7 +1,9 @@
-import Link from "next/link";
-import styled from "styled-components";
 import { useRouter } from "next/router.js";
 import SolutionInfo from "../components/SolutionInfo";
+import {
+  StyledHeader,
+  StyledListContainer,
+} from "../components/Card/Card.styled";
 
 export default function Solution({ mainData }) {
   const router = useRouter();
@@ -19,11 +21,3 @@ export default function Solution({ mainData }) {
     </>
   );
 }
-
-const StyledListContainer = styled.ul`
-  padding 5px 5px 10% 5px
-`;
-
-const StyledHeader = styled.h1`
-  font-color: red;
-`;
