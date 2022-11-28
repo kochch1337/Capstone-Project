@@ -1,5 +1,9 @@
 import { useRouter } from "next/router.js";
-import { FormsBase, TextElement } from "./SolutionChanger.styled";
+import {
+  FormsBase,
+  TextElement,
+  ButtonContainer,
+} from "./SolutionChanger.styled";
 import ButtonNew from "../../components/Button";
 import SelectPerson from "../SelectPerson";
 import { useState } from "react";
@@ -30,12 +34,35 @@ export default function SolutionChanger({
     event.preventDefault();
     const data = new FormData(event.target);
     const formData = new FormData(event.target.form);
-    console.log(formData);
-    console.log(data);
+
+    const solutionName = data.get("solution_name").trim();
+    if (solutionName.length === 0) {
+      alert(
+        `Please enter a solution name with at least ${minSolutionLength} chars that are not whitespaces`
+      );
+      return;
+    }
+
+    const teamName = data.get("team_name").trim();
+    if (teamName.length === 0) {
+      alert(
+        `Please enter a team name with at least ${minTeamLength} chars that are not whitespaces`
+      );
+      return;
+    }
+
+    const supportGroupName = data.get("support_group").trim();
+    if (supportGroupName.length === 0) {
+      alert(
+        `Please enter a support-group with at least ${minSupportGroupLength} chars that are not whitespaces`
+      );
+      return;
+    }
+
     const newSolution = {
       solution_Id: crypto.randomUUID(),
-      solution: data.get("solution_name").trim(),
-      team: data.get("team_name").trim(),
+      solution: solutionName,
+      team: teamName,
       bpe: personsData.find((person) => person.personal_Id === data.get("BPE")),
       bseint: personsData.find(
         (person) => person.personal_Id === data.get("BSEINT")
@@ -47,7 +74,7 @@ export default function SolutionChanger({
         (person) => person.personal_Id === data.get("Lead Developer")
       ),
       cbo: personsData.find((person) => person.personal_Id === data.get("CBO")),
-      supportGroup: data.get("support_group").trim(),
+      supportGroup: supportGroupName,
       modules: [],
     };
 
@@ -137,20 +164,21 @@ export default function SolutionChanger({
           filter="bc"
           responsibility="CBO"
         />
-        <ButtonNew type="submit" variant="submit">
-          Add new Solution
-        </ButtonNew>
-        <ButtonNew
-          type="cancel"
-          data-js="cancel"
-          variant="cancel"
-          onClick={(event) => {
-            event.preventDefault();
-            router.push("/New");
-          }}
-        >
-          Cancel
-        </ButtonNew>
+        <ButtonContainer>
+          <ButtonNew
+            type="cancel"
+            variant="cancel"
+            onClick={(event) => {
+              event.preventDefault();
+              router.push("/New");
+            }}
+          >
+            Cancel
+          </ButtonNew>
+          <ButtonNew type="submit" variant="submit">
+            Add new Solution
+          </ButtonNew>
+        </ButtonContainer>
       </FormsBase>
     </>
   );

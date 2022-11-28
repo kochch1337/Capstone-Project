@@ -12,4 +12,9 @@ const FormsBase = styled.form`
   gap: 10px;
 `;
 
-export { TextElement, FormsBase };
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export { TextElement, FormsBase, ButtonContainer };
