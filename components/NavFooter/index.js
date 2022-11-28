@@ -16,30 +16,36 @@ export default function NavFooter() {
       <StyledNav>
         <StyledNavigationList>
           <StyledNavigationListItem>
-            <Link href="/" passHref legacyBehavior>
-              <StyledNavLink active={pathname === "/"}>Solution</StyledNavLink>
-            </Link>
+            <StyledNavLink href="/" passHref active={pathname === "/" ? 1 : 0}>
+              Solution
+            </StyledNavLink>
           </StyledNavigationListItem>
           <StyledNavigationListItem>
-            <Link href="/modules" passHref legacyBehavior>
-              <StyledNavLink active={pathname === "/modules"}>
-                Modules
-              </StyledNavLink>
-            </Link>
+            <StyledNavLink
+              href="/modules"
+              passHref
+              active={pathname === "/modules" ? 1 : 0}
+            >
+              Modules
+            </StyledNavLink>
           </StyledNavigationListItem>
           <StyledNavigationListItem>
-            <Link href="/persons" passHref legacyBehavior>
-              <StyledNavLink active={pathname === "/persons"}>
-                Persons
-              </StyledNavLink>
-            </Link>
+            <StyledNavLink
+              href="/persons"
+              passHref
+              active={pathname === "/persons" ? 1 : 0}
+            >
+              Persons
+            </StyledNavLink>
           </StyledNavigationListItem>
           <StyledNavigationListItem>
-            <Link href="/newEntries" passHref legacyBehavior>
-              <StyledNavLink active={pathname === "/newEntries"}>
-                +
-              </StyledNavLink>
-            </Link>
+            <StyledNavLink
+              href="/newEntries"
+              passHref
+              active={pathname === "/newEntries" ? 1 : 0}
+            >
+              +
+            </StyledNavLink>
           </StyledNavigationListItem>
         </StyledNavigationList>
       </StyledNav>
