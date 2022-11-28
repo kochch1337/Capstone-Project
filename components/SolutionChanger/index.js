@@ -170,7 +170,7 @@ export default function SolutionChanger({
             variant="cancel"
             onClick={(event) => {
               event.preventDefault();
-              router.push("/New");
+              router.push("/newEntries");
             }}
           >
             Cancel
