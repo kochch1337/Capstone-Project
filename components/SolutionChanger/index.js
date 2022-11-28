@@ -26,15 +26,12 @@ export default function SolutionChanger({
     maxSupportGroupLength
   );
 
-  const [bpe, setBpe] = useState();
-  const [bseint, setBseint] = useState();
-  const [bsegr, setBsegr] = useState();
-  const [leadDev, setLeadDev] = useState();
-  const [cbo, setCbo] = useState();
-
   function onSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.target);
+    const formData = new FormData(event.target.form);
+    console.log(formData);
+    console.log(data);
     const newSolution = {
       solution_Id: crypto.randomUUID(),
       solution: data.get("solution_name").trim(),
@@ -64,7 +61,6 @@ export default function SolutionChanger({
           type="text"
           name="solution_name"
           id="solution_name"
-          data-js="solution_name"
           placeholder="Please enter the name of the solution (2-20 chars)"
           minLength={minSolutionLength}
           maxLength={maxSolutionLength}
@@ -83,7 +79,6 @@ export default function SolutionChanger({
           type="text"
           name="team_name"
           id="team_name"
-          data-js="team_name"
           placeholder="Please enter Team name"
           minLength={minTeamLength}
           maxLength={maxTeamLength}
@@ -117,33 +112,28 @@ export default function SolutionChanger({
           personsData={personsData}
           filter="bc"
           responsibility="BPE"
-          setPersonId={setBpe}
         />
         <SelectPerson
           personsData={personsData}
           filter="bc"
           responsibility="BSEINT"
-          setPersonId={setBseint}
         />
         <SelectPerson
           personsData={personsData}
           filter="bc"
           responsibility="BSEGR"
-          setPersonId={setBsegr}
         />
         <SelectPerson
           personsData={personsData}
           filter="dev"
           responsibility="Lead Developer"
-          setPersonId={setLeadDev}
         />
         <SelectPerson
           personsData={personsData}
           filter="bc"
           responsibility="CBO"
-          setPersonId={setCbo}
         />
-        <ButtonNew type="submit" data-js="submit" variant="submit">
+        <ButtonNew type="submit" variant="submit">
           Add new Solution
         </ButtonNew>
         <ButtonNew

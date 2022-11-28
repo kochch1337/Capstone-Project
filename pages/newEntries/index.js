@@ -4,7 +4,6 @@ import ButtonNew from "../../components/Button";
 
 export default function NewEntries({ mainData, personsData }) {
   const router = useRouter();
-  const query = router.query;
 
   return (
     <>
@@ -16,8 +15,6 @@ export default function NewEntries({ mainData, personsData }) {
       >
         new solution
       </ButtonNew>
-      <ButtonNew>new module</ButtonNew>
-      <ButtonNew>new person</ButtonNew>
     </>
   );
 }

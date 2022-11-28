@@ -1,4 +1,4 @@
-import styled, { css, ThemeProvider } from "styled-components";
+import styled, { css } from "styled-components";
 
 const ButtonStyled = styled.button`
   display: flex;

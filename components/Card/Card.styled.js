@@ -1,10 +1,9 @@
-import styled, { ThemeProvider } from "styled-components";
+import styled from "styled-components";
 
 const StyledCard = styled.li`
   position: relative;
   color: var(--granite);
   width: 100%;
-
   border-radius: 5px;
   overflow: hidden;
   background-color: var(--water);
