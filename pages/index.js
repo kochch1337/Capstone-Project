@@ -5,7 +5,7 @@ import {
   StyledListContainer,
 } from "../components/Card/Card.styled";
 
-export default function Solution({ mainData }) {
+export default function Solution({ mainData, personsData }) {
   const router = useRouter();
 
   return (
@@ -14,7 +14,11 @@ export default function Solution({ mainData }) {
       <StyledListContainer>
         {mainData.map((solution) => {
           return (
-            <SolutionInfo key={solution.solution_Id} solution={solution} />
+            <SolutionInfo
+              key={solution.solution_Id}
+              solution={solution}
+              personsData={personsData}
+            />
           );
         })}
       </StyledListContainer>

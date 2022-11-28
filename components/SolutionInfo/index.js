@@ -8,7 +8,7 @@ import {
   StyledCardModuleListItem,
 } from "../Card/Card.styled";
 
-export default function SolutionInfo({ solution }) {
+export default function SolutionInfo({ solution, personsData }) {
   return (
     <>
       <StyledCard key={solution.solution_Id}>
@@ -35,20 +35,49 @@ export default function SolutionInfo({ solution }) {
             SupportGroup: {solution.supportGroup}
           </StyledCardContentElement>
           <StyledCardContentElement>
-            BPE: {solution.bpe.firstname} {solution.bpe.lastname}
+            BPE:
+            {solution.bpe.map((personalid) => {
+              const person = personsData.find(
+                (pers) => pers.personal_Id == personalid
+              );
+              return ` ${person.firstname} ${person.lastname}`;
+            })}
           </StyledCardContentElement>
           <StyledCardContentElement>
-            BSEINT: {solution.bseint.firstname} {solution.bseint.lastname}
+            BSEINT:{" "}
+            {solution.bseint.map((personalid) => {
+              const person = personsData.find(
+                (pers) => pers.personal_Id == personalid
+              );
+              return `${person.firstname} ${person.lastname}`;
+            })}
           </StyledCardContentElement>
           <StyledCardContentElement>
-            BSEGR: {solution.bsegr.firstname} {solution.bsegr.lastname}
+            BSEGR:{" "}
+            {solution.bsegr.map((personalid) => {
+              const person = personsData.find(
+                (pers) => pers.personal_Id == personalid
+              );
+              return `${person.firstname} ${person.lastname}`;
+            })}
           </StyledCardContentElement>
           <StyledCardContentElement>
-            Lead Developer: {solution.leadDeveloper.firstname}{" "}
-            {solution.leadDeveloper.lastname}
+            Lead Developer:{" "}
+            {solution.leadDeveloper.map((personalid) => {
+              const person = personsData.find(
+                (pers) => pers.personal_Id == personalid
+              );
+              return `${person.firstname} ${person.lastname}`;
+            })}
           </StyledCardContentElement>
           <StyledCardContentElement>
-            CBO: {solution.cbo.firstname} {solution.cbo.lastname}
+            CBO:{" "}
+            {solution.cbo.map((personalid) => {
+              const person = personsData.find(
+                (pers) => pers.personal_Id == personalid
+              );
+              return `${person.firstname} ${person.lastname}`;
+            })}
           </StyledCardContentElement>
           <StyledCardContentElement>
             <StyledCardModuleList>
