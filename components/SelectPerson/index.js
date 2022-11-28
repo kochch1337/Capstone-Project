@@ -10,7 +10,12 @@ export default function SelectPerson({ personsData, filter, responsibility }) {
   return (
     <>
       <label htmlFor="select-person">{responsibility}:</label>
-      <Select id="select-person" defaultValue={""} required>
+      <Select
+        id="select-person"
+        defaultValue={""}
+        name={responsibility}
+        required
+      >
         <option key="none" value="" disabled>
           Please select a person
         </option>

@@ -1,4 +1,4 @@
-import styled, { ThemeProvider } from "styled-components";
+import styled from "styled-components";
 
 const StyledFooter = styled.footer`
   position: fixed;

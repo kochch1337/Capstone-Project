@@ -10,7 +10,7 @@ export default function NewEntries({ mainData, personsData }) {
       <StyledHeader>add new</StyledHeader>
       <ButtonNew
         onClick={() => {
-          router.push("/Create");
+          router.push("/createSolution");
         }}
       >
         new solution

@@ -8,6 +8,10 @@ function MyApp({ Component, pageProps }) {
   const [mainData, setMainData] = useLocalStorage("mainData", data);
   const [personsData, setPersonsData] = useLocalStorage("personsData", persons);
 
+  function addSolution(newSolution) {
+    setMainData([...mainData, newSolution]);
+  }
+
   return (
     <>
       <GlobalStyles />
@@ -15,9 +19,8 @@ function MyApp({ Component, pageProps }) {
         <Component
           {...pageProps}
           mainData={mainData}
-          setMainData={setMainData}
+          addSolution={addSolution}
           personsData={personsData}
-          setPersonsData={setPersonsData}
         />
       </Layout>
     </>

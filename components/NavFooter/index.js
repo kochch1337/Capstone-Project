@@ -21,22 +21,24 @@ export default function NavFooter() {
             </Link>
           </StyledNavigationListItem>
           <StyledNavigationListItem>
-            <Link href="/Modules" passHref legacyBehavior>
-              <StyledNavLink active={pathname === "/Modules"}>
+            <Link href="/modules" passHref legacyBehavior>
+              <StyledNavLink active={pathname === "/modules"}>
                 Modules
               </StyledNavLink>
             </Link>
           </StyledNavigationListItem>
           <StyledNavigationListItem>
-            <Link href="/Persons" passHref legacyBehavior>
-              <StyledNavLink active={pathname === "/Persons"}>
+            <Link href="/persons" passHref legacyBehavior>
+              <StyledNavLink active={pathname === "/persons"}>
                 Persons
               </StyledNavLink>
             </Link>
           </StyledNavigationListItem>
           <StyledNavigationListItem>
-            <Link href="/New" passHref legacyBehavior>
-              <StyledNavLink active={pathname === "/New"}>+</StyledNavLink>
+            <Link href="/newEntries" passHref legacyBehavior>
+              <StyledNavLink active={pathname === "/newEntries"}>
+                +
+              </StyledNavLink>
             </Link>
           </StyledNavigationListItem>
         </StyledNavigationList>

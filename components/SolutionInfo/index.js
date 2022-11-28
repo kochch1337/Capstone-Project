@@ -16,7 +16,7 @@ export default function SolutionInfo({ solution }) {
           <StyledCardTitle>
             <Link
               href={{
-                pathname: "/Modules",
+                pathname: "/modules",
                 query: {
                   SolutionId: solution.solution_Id,
                 },
@@ -58,7 +58,7 @@ export default function SolutionInfo({ solution }) {
                   <StyledCardModuleListItem key={module.module}>
                     <Link
                       href={{
-                        pathname: "/Modules",
+                        pathname: "/modules",
                         query: {
                           SolutionId: solution.solution_Id,
                           Module: module.module,

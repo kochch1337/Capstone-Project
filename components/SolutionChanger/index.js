@@ -15,7 +15,7 @@ const minSupportGroupLength = 2;
 export default function SolutionChanger({
   mainData,
   personsData,
-  setMainData,
+  addSolution,
 }) {
   const router = useRouter();
 
@@ -36,18 +36,22 @@ export default function SolutionChanger({
       solution_Id: crypto.randomUUID(),
       solution: data.get("solution_name").trim(),
       team: data.get("team_name").trim(),
-      bpe: personsData.find((person) => person.personal_Id === bpe),
-      bseint: personsData.find((person) => person.personal_Id === bseint),
-      bsegr: personsData.find((person) => person.personal_Id === bsegr),
-      leadDeveloper: personsData.find(
-        (person) => person.personal_Id === leadDev
+      bpe: personsData.find((person) => person.personal_Id === data.get("BPE")),
+      bseint: personsData.find(
+        (person) => person.personal_Id === data.get("BSEINT")
       ),
-      cbo: personsData.find((person) => person.personal_Id === cbo),
+      bsegr: personsData.find(
+        (person) => person.personal_Id === data.get("BSEGR")
+      ),
+      leadDeveloper: personsData.find(
+        (person) => person.personal_Id === data.get("Lead Developer")
+      ),
+      cbo: personsData.find((person) => person.personal_Id === data.get("CBO")),
       supportGroup: data.get("support_group").trim(),
       modules: [],
     };
 
-    setMainData([...mainData, newSolution]);
+    addSolution(newSolution);
     alert("Solution saved");
     router.push("/");
   }
