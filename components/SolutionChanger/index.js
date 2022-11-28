@@ -16,10 +16,8 @@ export default function SolutionChanger({
   mainData,
   personsData,
   setMainData,
-  setPersonsData,
 }) {
   const router = useRouter();
-  const query = router.query;
 
   const [inputCounterSolution, setInputCounterSolution] =
     useState(maxSolutionLength);
@@ -37,8 +35,24 @@ export default function SolutionChanger({
   function onSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.target);
-    console.log("Button submitted");
-    console.log(data);
+    const newSolution = {
+      solution_Id: crypto.randomUUID(),
+      solution: data.get("solution_name"),
+      team: data.get("team_name"),
+      bpe: personsData.find((person) => person.personal_Id === bpe),
+      bseint: personsData.find((person) => person.personal_Id === bseint),
+      bsegr: personsData.find((person) => person.personal_Id === bsegr),
+      leadDeveloper: personsData.find(
+        (person) => person.personal_Id === leadDev
+      ),
+      cbo: personsData.find((person) => person.personal_Id === cbo),
+      supportGroup: data.get("support_group"),
+      modules: [],
+    };
+
+    setMainData([...mainData, newSolution]);
+    alert("Solution saved");
+    router.push("/");
   }
 
   return (
@@ -84,8 +98,8 @@ export default function SolutionChanger({
         <label htmlFor="support_group">Support-Group:</label>
         <input
           type="text"
-          name="support_group-group"
-          id="support_group-group"
+          name="support_group"
+          id="support_group"
           placeholder="Please enter the name of the support group"
           minLength={minSupportGroupLength}
           maxLength={maxSupportGroupLength}
@@ -146,19 +160,4 @@ export default function SolutionChanger({
       </FormsBase>
     </>
   );
-}
-
-function AppendCard(cardsState, setCardsState, question, answer, tags) {
-  const ids = cardsState.map((card) => {
-    return card.id;
-  });
-  const maxId = Math.max(...ids);
-  const newCard = {
-    id: maxId + 1,
-    question: question,
-    answer: answer,
-    tags: Array.from(tags),
-  };
-
-  setCardsState([...cardsState, newCard]);
 }
