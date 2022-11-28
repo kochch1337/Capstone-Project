@@ -37,8 +37,8 @@ export default function SolutionChanger({
     const data = new FormData(event.target);
     const newSolution = {
       solution_Id: crypto.randomUUID(),
-      solution: data.get("solution_name"),
-      team: data.get("team_name"),
+      solution: data.get("solution_name").trim(),
+      team: data.get("team_name").trim(),
       bpe: personsData.find((person) => person.personal_Id === bpe),
       bseint: personsData.find((person) => person.personal_Id === bseint),
       bsegr: personsData.find((person) => person.personal_Id === bsegr),
@@ -46,7 +46,7 @@ export default function SolutionChanger({
         (person) => person.personal_Id === leadDev
       ),
       cbo: personsData.find((person) => person.personal_Id === cbo),
-      supportGroup: data.get("support_group"),
+      supportGroup: data.get("support_group").trim(),
       modules: [],
     };
 
