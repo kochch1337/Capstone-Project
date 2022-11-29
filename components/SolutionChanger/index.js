@@ -8,6 +8,7 @@ import ButtonNew from "../../components/Button";
 import SelectPerson from "../SelectPerson";
 import { useState } from "react";
 import { StyledHeader } from "../Card/Card.styled";
+import SnackBar from "../SnackBar";
 
 const maxSolutionLength = 20;
 const minSolutionLength = 2;
@@ -22,6 +23,8 @@ export default function SolutionChanger({
   addSolution,
 }) {
   const router = useRouter();
+
+  const [showSnack, setShowSnack] = useState(false);
 
   const [inputCounterSolution, setInputCounterSolution] =
     useState(maxSolutionLength);
@@ -93,8 +96,11 @@ export default function SolutionChanger({
     };
 
     addSolution(newSolution);
-    alert("Solution saved");
-    router.push("/");
+
+    console.log("sol saved now open snack");
+
+    setShowSnack(true);
+    console.log("setShowSnack set");
   }
 
   return (
@@ -183,6 +189,16 @@ export default function SolutionChanger({
           responsibility="cbo"
           titleHeader="CBO"
         />
+        {showSnack && (
+          <SnackBar
+            text={"Solution saved"}
+            onClose={() => {
+              console.log("on close started");
+              router.push(`/`);
+            }}
+          />
+        )}
+        {!showSnack && <></>}
         <ButtonContainer>
           <ButtonNew type="reset" variant="reset">
             Reset
