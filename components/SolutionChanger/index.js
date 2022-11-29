@@ -33,12 +33,21 @@ export default function SolutionChanger({
   function onSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.target);
-    const formData = new FormData(event.target.form);
 
     const solutionName = data.get("solution_name").trim();
     if (solutionName.length === 0) {
       alert(
         `Please enter a solution name with at least ${minSolutionLength} chars that are not whitespaces`
+      );
+      return;
+    }
+
+    if (
+      mainData.filter((solution) => solution.solution === solutionName).length >
+      0
+    ) {
+      alert(
+        `Solution ${solutionName} already exists. Please choose a unique name.`
       );
       return;
     }
@@ -63,17 +72,11 @@ export default function SolutionChanger({
       solution_Id: crypto.randomUUID(),
       solution: solutionName,
       team: teamName,
-      bpe: personsData.find((person) => person.personal_Id === data.get("BPE")),
-      bseint: personsData.find(
-        (person) => person.personal_Id === data.get("BSEINT")
-      ),
-      bsegr: personsData.find(
-        (person) => person.personal_Id === data.get("BSEGR")
-      ),
-      leadDeveloper: personsData.find(
-        (person) => person.personal_Id === data.get("Lead Developer")
-      ),
-      cbo: personsData.find((person) => person.personal_Id === data.get("CBO")),
+      bpe: [data.get("BPE")],
+      bseint: [data.get("BSEINT")],
+      bsegr: [data.get("BSEGR")],
+      leadDeveloper: [data.get("Lead Developer")],
+      cbo: [data.get("CBO")],
       supportGroup: supportGroupName,
       modules: [],
     };
