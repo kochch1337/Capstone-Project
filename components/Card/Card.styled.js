@@ -42,7 +42,7 @@ const StyledCardModuleListItem = styled.li`
 `;
 
 const StyledListContainer = styled.ul`
-  padding 5px 5px 10% 5px
+  padding 1% 1% 10% 1%
 `;
 
 const StyledHeader = styled.h1`

@@ -34,7 +34,18 @@ export default function SolutionChanger({
     event.preventDefault();
     const data = new FormData(event.target);
 
-    const solutionName = data.get("solution_name").trim();
+    const {
+      solution_name,
+      team_name,
+      bpe,
+      bseint,
+      bsegr,
+      leadDeveloper,
+      cbo,
+      support_group,
+    } = Object.fromEntries(data);
+
+    const solutionName = solution_name.trim();
     if (solutionName.length === 0) {
       alert(
         `Please enter a solution name with at least ${minSolutionLength} chars that are not whitespaces`
@@ -52,7 +63,7 @@ export default function SolutionChanger({
       return;
     }
 
-    const teamName = data.get("team_name").trim();
+    const teamName = team_name.trim();
     if (teamName.length === 0) {
       alert(
         `Please enter a team name with at least ${minTeamLength} chars that are not whitespaces`
@@ -60,7 +71,7 @@ export default function SolutionChanger({
       return;
     }
 
-    const supportGroupName = data.get("support_group").trim();
+    const supportGroupName = support_group.trim();
     if (supportGroupName.length === 0) {
       alert(
         `Please enter a support-group with at least ${minSupportGroupLength} chars that are not whitespaces`
@@ -72,11 +83,11 @@ export default function SolutionChanger({
       solution_Id: crypto.randomUUID(),
       solution: solutionName,
       team: teamName,
-      bpe: [data.get("BPE")],
-      bseint: [data.get("BSEINT")],
-      bsegr: [data.get("BSEGR")],
-      leadDeveloper: [data.get("Lead Developer")],
-      cbo: [data.get("CBO")],
+      bpe: [bpe],
+      bseint: [bseint],
+      bsegr: [bsegr],
+      leadDeveloper: [leadDeveloper],
+      cbo: [cbo],
       supportGroup: supportGroupName,
       modules: [],
     };
@@ -145,38 +156,36 @@ export default function SolutionChanger({
         <SelectPerson
           personsData={personsData}
           filter="bc"
-          responsibility="BPE"
+          responsibility="bpe"
+          titleHeader="BPE"
         />
         <SelectPerson
           personsData={personsData}
           filter="bc"
-          responsibility="BSEINT"
+          responsibility="bseint"
+          titleHeader="BSEINT"
         />
         <SelectPerson
           personsData={personsData}
           filter="bc"
-          responsibility="BSEGR"
+          responsibility="bsegr"
+          titleHeader="BSEGR"
         />
         <SelectPerson
           personsData={personsData}
           filter="dev"
-          responsibility="Lead Developer"
+          responsibility="leadDeveloper"
+          titleHeader="Lead Developer"
         />
         <SelectPerson
           personsData={personsData}
           filter="bc"
-          responsibility="CBO"
+          responsibility="cbo"
+          titleHeader="CBO"
         />
         <ButtonContainer>
-          <ButtonNew
-            type="cancel"
-            variant="cancel"
-            onClick={(event) => {
-              event.preventDefault();
-              router.push("/newEntries");
-            }}
-          >
-            Cancel
+          <ButtonNew type="reset" variant="reset">
+            Reset
           </ButtonNew>
           <ButtonNew type="submit" variant="submit">
             Add new Solution

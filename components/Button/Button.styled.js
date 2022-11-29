@@ -13,7 +13,7 @@ const ButtonStyled = styled.button`
   color: #fff;
 
   ${({ variant }) =>
-    variant === "cancel" &&
+    variant === "reset" &&
     css`
       background-color: ${(props) => props.theme.colors.activeColor};
     `}

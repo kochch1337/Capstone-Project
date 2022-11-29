@@ -1,6 +1,11 @@
 import { Select } from "./SelectPerson.styled";
 
-export default function SelectPerson({ personsData, filter, responsibility }) {
+export default function SelectPerson({
+  personsData,
+  filter,
+  responsibility,
+  titleHeader,
+}) {
   let filteredPersons = personsData;
 
   if (filter !== undefined) {
@@ -9,7 +14,7 @@ export default function SelectPerson({ personsData, filter, responsibility }) {
 
   return (
     <>
-      <label htmlFor="select-person">{responsibility}:</label>
+      <label htmlFor="select-person">{titleHeader}:</label>
       <Select
         id="select-person"
         defaultValue={""}

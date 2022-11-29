@@ -23,11 +23,11 @@ const StyledNavLink = styled(Link)`
   color: ${(props) => props.theme.colors.primaryFontColor};
   font-size: 1em;
   padding: 1.5em 0.5em;
-  float: left;
+  display: flex;
+  justify-content: center;
   text-align: center;
   width: 100%;
   height: 100%;
-  positon: center;
 
   background: ${(props) =>
     props.active
@@ -50,7 +50,6 @@ const StyledNavigationList = styled.ul`
 `;
 
 const StyledNavigationListItem = styled.li`
-  float: left;
   width: 25%;
 `;
 
