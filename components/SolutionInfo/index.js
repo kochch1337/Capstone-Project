@@ -14,17 +14,20 @@ export default function SolutionInfo({ solution, personsData }) {
       <StyledCard key={solution.solution_Id}>
         <StyledCardContent>
           <StyledCardTitle>
-            <Link
-              href={{
-                pathname: "/modules",
-                query: {
-                  SolutionId: solution.solution_Id,
-                },
-              }}
-              passHref
-            >
-              {solution.solution}
-            </Link>
+            {solution.modules.length > 0 && (
+              <Link
+                href={{
+                  pathname: "/modules",
+                  query: {
+                    SolutionId: solution.solution_Id,
+                  },
+                }}
+                passHref
+              >
+                {solution.solution}
+              </Link>
+            )}
+            {solution.modules.length === 0 && solution.solution}
           </StyledCardTitle>
         </StyledCardContent>
         <StyledCardContent>
