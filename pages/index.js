@@ -1,9 +1,11 @@
-import Link from "next/link";
-import styled from "styled-components";
 import { useRouter } from "next/router.js";
 import SolutionInfo from "../components/SolutionInfo";
+import {
+  StyledHeader,
+  StyledListContainer,
+} from "../components/Card/Card.styled";
 
-export default function Solution({ mainData }) {
+export default function Solution({ mainData, personsData }) {
   const router = useRouter();
 
   return (
@@ -12,18 +14,14 @@ export default function Solution({ mainData }) {
       <StyledListContainer>
         {mainData.map((solution) => {
           return (
-            <SolutionInfo key={solution.solution_Id} solution={solution} />
+            <SolutionInfo
+              key={solution.solution_Id}
+              solution={solution}
+              personsData={personsData}
+            />
           );
         })}
       </StyledListContainer>
     </>
   );
 }
-
-const StyledListContainer = styled.ul`
-  padding 5px 5px 10% 5px
-`;
-
-const StyledHeader = styled.h1`
-  font-color: red;
-`;
