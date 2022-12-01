@@ -5,32 +5,30 @@ import {
   StyledListContainer,
 } from "../../components/Card/Card.styled";
 
-export default function Modules({ mainData }) {
+export default function Modules({ solutionsData, modulesData, personsData }) {
   const router = useRouter();
   const query = router.query;
 
   const solutionid = query.SolutionId;
-  const moduleName = query.Module;
-
+  let moduleId = query.ModuleId;
   let data = [];
 
-  data = mainData.map((solution) => solution);
+  data = solutionsData.map((solution) => solution);
 
   if (solutionid !== undefined) {
-    data = mainData
+    data = solutionsData
       .filter((solution) => solution.solution_Id === solutionid)
       .map((solution) => solution);
   }
 
-  if (moduleName !== undefined) {
-    data = mainData
+  if (moduleId !== undefined) {
+    moduleId = moduleId.toString();
+    data = solutionsData
       .filter((solution) => solution.solution_Id === solutionid)
       .map((solution) => {
         return {
           ...solution,
-          modules: solution.modules.filter(
-            (module) => module.module === moduleName
-          ),
+          modules: solution.modules.filter((moduleID) => moduleID === moduleId),
         };
       });
   }
@@ -40,12 +38,17 @@ export default function Modules({ mainData }) {
       <StyledHeader>Modules</StyledHeader>
       <StyledListContainer>
         {data.map((solution) => {
-          return solution.modules.map((module) => {
+          return solution.modules.map((moduleId) => {
+            const module = modulesData.find(
+              (moduledata) => moduledata.module_Id == moduleId
+            );
             return (
               <ModuleInfo
                 key={module.module}
                 solution={solution}
                 module={module}
+                modulesData={modulesData}
+                personsData={personsData}
               />
             );
           });

@@ -2,7 +2,7 @@ import { useRouter } from "next/router.js";
 import { StyledHeader } from "../../components/Card/Card.styled";
 import ButtonNew from "../../components/Button";
 
-export default function NewEntries({ mainData, personsData }) {
+export default function NewEntries() {
   const router = useRouter();
 
   return (
@@ -14,6 +14,13 @@ export default function NewEntries({ mainData, personsData }) {
         }}
       >
         new solution
+      </ButtonNew>
+      <ButtonNew
+        onClick={() => {
+          router.push("/createModule");
+        }}
+      >
+        new module
       </ButtonNew>
     </>
   );

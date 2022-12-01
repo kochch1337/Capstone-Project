@@ -1,7 +1,7 @@
 import { useRouter } from "next/router.js";
 import { StyledHeader } from "../../components/Card/Card.styled";
 
-export default function Persons({ mainData, personsData }) {
+export default function Persons({ solutionsData, personsData }) {
   const router = useRouter();
   const query = router.query;
 
@@ -12,7 +12,7 @@ export default function Persons({ mainData, personsData }) {
   let bpas = personsData.filter((dev) => dev.role === "bc");
 
   if (solutionid !== undefined && moduleName !== undefined) {
-    const solutionData = mainData.find(
+    const solutionData = solutionsData.find(
       (solution) => solution.solution_Id === solutionid
     );
 
@@ -23,7 +23,7 @@ export default function Persons({ mainData, personsData }) {
   }
 
   if (solutionid !== undefined && moduleName !== undefined) {
-    const solutionData = mainData.find(
+    const solutionData = solutionsData.find(
       (solution) => solution.solution_Id === solutionid
     );
 

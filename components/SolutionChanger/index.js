@@ -3,7 +3,7 @@ import {
   FormsBase,
   TextElement,
   ButtonContainer,
-} from "./SolutionChanger.styled";
+} from "../InputForm/InputForm.styled";
 import ButtonNew from "../../components/Button";
 import SelectPerson from "../SelectPerson";
 import { useState } from "react";
@@ -18,7 +18,7 @@ const maxSupportGroupLength = 30;
 const minSupportGroupLength = 2;
 
 export default function SolutionChanger({
-  mainData,
+  solutionsData,
   personsData,
   addSolution,
 }) {
@@ -57,8 +57,8 @@ export default function SolutionChanger({
     }
 
     if (
-      mainData.filter((solution) => solution.solution === solutionName).length >
-      0
+      solutionsData.filter((solution) => solution.solution === solutionName)
+        .length > 0
     ) {
       alert(
         `Solution ${solutionName} already exists. Please choose a unique name.`
@@ -96,11 +96,7 @@ export default function SolutionChanger({
     };
 
     addSolution(newSolution);
-
-    console.log("sol saved now open snack");
-
     setShowSnack(true);
-    console.log("setShowSnack set");
   }
 
   return (
@@ -193,12 +189,11 @@ export default function SolutionChanger({
           <SnackBar
             text={"Solution saved"}
             onClose={() => {
-              console.log("on close started");
               router.push(`/`);
             }}
           />
         )}
-        {!showSnack && <></>}
+        {!showSnack && <p> </p>}
         <ButtonContainer>
           <ButtonNew type="reset" variant="reset">
             Reset

@@ -80,7 +80,7 @@ const persons = [
   {
     personal_Id: "14",
     firstname: "Thorsten",
-    lastname: "Kurz",
+    lastname: "Heinzmann",
     role: "bc",
   },
   {

@@ -5,6 +5,7 @@ export default function SelectPerson({
   filter,
   responsibility,
   titleHeader,
+  onChange,
 }) {
   let filteredPersons = personsData;
 
@@ -17,11 +18,12 @@ export default function SelectPerson({
       <label htmlFor="select-person">{titleHeader}:</label>
       <Select
         id="select-person"
-        defaultValue={""}
+        defaultValue={"noSelect"}
         name={responsibility}
         required
+        onChange={onChange}
       >
-        <option key="none" value="" disabled>
+        <option key="none" value="noSelect" disabled>
           Please select a person
         </option>
         {filteredPersons.map((person) => {

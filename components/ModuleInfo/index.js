@@ -8,7 +8,7 @@ import {
   StyledCardModuleListItem,
 } from "../Card/Card.styled";
 
-export default function ModuleInfo({ solution, module }) {
+export default function ModuleInfo({ solution, module, personsData }) {
   return (
     <>
       <StyledCard key={module.module}>
@@ -33,28 +33,60 @@ export default function ModuleInfo({ solution, module }) {
             SupportGroup: {solution.supportGroup}
           </StyledCardContentElement>
           <StyledCardContentElement>
-            BPE: {solution.bpe.firstname} {solution.bpe.lastname}
+            BPE:{" "}
+            {solution.bpe.map((personalid) => {
+              const person = personsData.find(
+                (pers) => pers.personal_Id == personalid
+              );
+              return ` ${person.firstname} ${person.lastname}`;
+            })}
           </StyledCardContentElement>
           <StyledCardContentElement>
-            BSEINT: {solution.bseint.firstname} {solution.bseint.lastname}
+            BSEINT:{" "}
+            {solution.bseint.map((personalid) => {
+              const person = personsData.find(
+                (pers) => pers.personal_Id == personalid
+              );
+              return `${person.firstname} ${person.lastname}`;
+            })}
           </StyledCardContentElement>
           <StyledCardContentElement>
-            BSEGR: {solution.bsegr.firstname} {solution.bsegr.lastname}
+            BSEGR:{" "}
+            {solution.bsegr.map((personalid) => {
+              const person = personsData.find(
+                (pers) => pers.personal_Id == personalid
+              );
+              return `${person.firstname} ${person.lastname}`;
+            })}{" "}
           </StyledCardContentElement>
           <StyledCardContentElement>
-            Lead Developer: {solution.leadDeveloper.firstname}{" "}
-            {solution.leadDeveloper.lastname}
+            Lead Developer:{" "}
+            {solution.leadDeveloper.map((personalid) => {
+              const person = personsData.find(
+                (pers) => pers.personal_Id == personalid
+              );
+              return `${person.firstname} ${person.lastname}`;
+            })}
           </StyledCardContentElement>
           <StyledCardContentElement>
-            CBO: {solution.cbo.firstname} {solution.cbo.lastname}
+            CBO:{" "}
+            {solution.cbo.map((personalid) => {
+              const person = personsData.find(
+                (pers) => pers.personal_Id == personalid
+              );
+              return `${person.firstname} ${person.lastname}`;
+            })}
           </StyledCardContentElement>
           <StyledCardContentElement>
             <StyledCardModuleList>
               <StyledCardModuleListItem>Developers: </StyledCardModuleListItem>
               {module.developer.map((dev) => {
+                const person = personsData.find(
+                  (pers) => pers.personal_Id == dev
+                );
                 return (
-                  <StyledCardModuleListItem key={dev.personal_Id}>
-                    {dev.firstname} {dev.lastname}
+                  <StyledCardModuleListItem key={person.personal_Id}>
+                    {person.firstname} {person.lastname}
                   </StyledCardModuleListItem>
                 );
               })}
@@ -64,9 +96,12 @@ export default function ModuleInfo({ solution, module }) {
             <StyledCardModuleList>
               <StyledCardModuleListItem>BPA: </StyledCardModuleListItem>
               {module.bpa.map((bpa) => {
+                const person = personsData.find(
+                  (pers) => pers.personal_Id == bpa
+                );
                 return (
-                  <StyledCardModuleListItem key={bpa.personal_Id}>
-                    {bpa.firstname} {bpa.lastname}
+                  <StyledCardModuleListItem key={person.personal_Id}>
+                    {person.firstname} {person.lastname}
                   </StyledCardModuleListItem>
                 );
               })}

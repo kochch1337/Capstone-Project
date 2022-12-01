@@ -5,18 +5,19 @@ import {
   StyledListContainer,
 } from "../components/Card/Card.styled";
 
-export default function Solution({ mainData, personsData }) {
+export default function Solution({ solutionsData, modulesData, personsData }) {
   const router = useRouter();
 
   return (
     <>
       <StyledHeader>Solutions</StyledHeader>
       <StyledListContainer>
-        {mainData.map((solution) => {
+        {solutionsData.map((solution) => {
           return (
             <SolutionInfo
               key={solution.solution_Id}
               solution={solution}
+              modulesData={modulesData}
               personsData={personsData}
             />
           );
