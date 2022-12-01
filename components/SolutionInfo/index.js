@@ -8,7 +8,7 @@ import {
   StyledCardModuleListItem,
 } from "../Card/Card.styled";
 
-export default function SolutionInfo({ solution, personsData }) {
+export default function SolutionInfo({ solution, modulesData, personsData }) {
   return (
     <>
       <StyledCard key={solution.solution_Id}>
@@ -85,7 +85,10 @@ export default function SolutionInfo({ solution, personsData }) {
           <StyledCardContentElement>
             <StyledCardModuleList>
               Modules:
-              {solution.modules.map((module) => {
+              {solution.modules.map((moduleid) => {
+                const module = modulesData.find(
+                  (moduledata) => moduledata.module_Id === moduleid
+                );
                 return (
                   <StyledCardModuleListItem key={module.module}>
                     <Link
@@ -93,7 +96,7 @@ export default function SolutionInfo({ solution, personsData }) {
                         pathname: "/modules",
                         query: {
                           SolutionId: solution.solution_Id,
-                          Module: module.module,
+                          ModuleId: module.module_Id,
                         },
                       }}
                       passHref
