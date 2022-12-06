@@ -32,6 +32,10 @@ function MyApp({ Component, pageProps }) {
     );
   }
 
+  function addPerson(newPerson) {
+    setPersonsData([...personsData, newPerson]);
+  }
+
   return (
     <>
       <GlobalStyles />
@@ -43,6 +47,7 @@ function MyApp({ Component, pageProps }) {
           personsData={personsData}
           addSolution={addSolution}
           addModule={addModule}
+          addPerson={addPerson}
         />
       </Layout>
     </>
