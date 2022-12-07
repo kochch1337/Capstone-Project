@@ -55,7 +55,6 @@ export default function PersonChanger({ addPerson }) {
       role: select_role,
     };
 
-    console.log(newPerson);
     addPerson(newPerson);
     setShowSnack(true);
   }
