@@ -15,7 +15,7 @@ const minFirstnameLength = 2;
 const maxLastnameLength = 80;
 const minLastnameLength = 2;
 
-export default function PersonChanger({ addPerson }) {
+export default function PersonChanger({ addPerson, updatePerson, person }) {
   const router = useRouter();
 
   const [showSnack, setShowSnack] = useState(false);
@@ -48,14 +48,26 @@ export default function PersonChanger({ addPerson }) {
       return;
     }
 
-    const newPerson = {
-      personal_Id: crypto.randomUUID(),
-      firstname: firstName,
-      lastname: lastName,
-      role: select_role,
-    };
+    if (person != undefined) {
+      const newPerson = {
+        personal_Id: person.personal_Id,
+        firstname: firstName,
+        lastname: lastName,
+        role: select_role,
+      };
 
-    addPerson(newPerson);
+      updatePerson(newPerson);
+    } else {
+      const newPerson = {
+        personal_Id: crypto.randomUUID(),
+        firstname: firstName,
+        lastname: lastName,
+        role: select_role,
+      };
+
+      addPerson(newPerson);
+    }
+
     setShowSnack(true);
   }
 
@@ -68,6 +80,7 @@ export default function PersonChanger({ addPerson }) {
           type="text"
           name="person_firstname"
           id="person_firstname"
+          defaultValue={person != undefined ? person.firstname : ""}
           placeholder={`Please enter the first name of the person (${minFirstnameLength}-${maxFirstnameLength} chars)`}
           minLength={minFirstnameLength}
           maxLength={maxFirstnameLength}
@@ -84,6 +97,7 @@ export default function PersonChanger({ addPerson }) {
           type="text"
           name="person_lastname"
           id="person_lastname"
+          defaultValue={person != undefined ? person.lastname : ""}
           placeholder={`Please enter the lastname of the person (${minLastnameLength}-${maxLastnameLength} chars)`}
           minLength={minLastnameLength}
           maxLength={maxLastnameLength}
@@ -95,7 +109,7 @@ export default function PersonChanger({ addPerson }) {
           required
         ></input>
         <TextElement>{inputCounterLastanme} characters left</TextElement>
-        <SelectRole required />
+        <SelectRole person={person} />
         {showSnack && (
           <SnackBar
             text={"Person saved"}
@@ -110,7 +124,7 @@ export default function PersonChanger({ addPerson }) {
             Reset
           </ButtonNew>
           <ButtonNew type="submit" variant="submit">
-            Add new Person
+            {person != undefined ? "update" : "save"}
           </ButtonNew>
         </ButtonContainer>
       </FormsBase>

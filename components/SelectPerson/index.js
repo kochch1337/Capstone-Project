@@ -6,6 +6,7 @@ export default function SelectPerson({
   responsibility,
   titleHeader,
   onChange,
+  defaultPerson,
 }) {
   let filteredPersons = personsData;
 
@@ -18,7 +19,7 @@ export default function SelectPerson({
       <label htmlFor="select-person">{titleHeader}:</label>
       <Select
         id="select-person"
-        defaultValue=""
+        defaultValue={defaultPerson}
         name={responsibility}
         required
         onChange={onChange}

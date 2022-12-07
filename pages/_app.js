@@ -32,8 +32,42 @@ function MyApp({ Component, pageProps }) {
     );
   }
 
+  function updateModule(changedModule, solutionId, oldSolutionId) {
+    setModulesData(
+      modulesData.map((module) =>
+        module.module_Id === changedModule.module_Id ? changedModule : module
+      )
+    );
+
+    if (solutionId !== oldSolutionId) {
+      setSolutionsData(
+        solutionsData.map((sol) => {
+          let solution = { ...sol };
+
+          if (solution.solution_Id === oldSolutionId) {
+            solution.modules = solution.modules.filter(
+              (module) => module !== changedModule.module_Id
+            );
+          } else if (solution.solution_Id === solutionId) {
+            solution.modules.push(changedModule.module_Id);
+          }
+
+          return solution;
+        })
+      );
+    }
+  }
+
   function addPerson(newPerson) {
     setPersonsData([...personsData, newPerson]);
+  }
+
+  function updatePerson(person) {
+    setPersonsData(
+      personsData.map((pers) =>
+        pers.personal_Id === person.personal_Id ? person : pers
+      )
+    );
   }
 
   return (
@@ -47,7 +81,9 @@ function MyApp({ Component, pageProps }) {
           personsData={personsData}
           addSolution={addSolution}
           addModule={addModule}
+          updateModule={updateModule}
           addPerson={addPerson}
+          updatePerson={updatePerson}
         />
       </Layout>
     </>

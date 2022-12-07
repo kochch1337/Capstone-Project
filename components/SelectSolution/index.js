@@ -1,12 +1,14 @@
 import { StyledSelectSolution } from "./SelectSolution.styled";
 
-export default function SelectSolution({ solutionsData }) {
+export default function SelectSolution({ solutionsData, preselectSolution }) {
   return (
     <>
       <label htmlFor="select_solution">Module for Solution:</label>
       <StyledSelectSolution
         id="select_solution"
-        defaultValue={""}
+        defaultValue={
+          preselectSolution != undefined ? preselectSolution.solution_Id : ""
+        }
         name="select_solution"
         required
       >
