@@ -17,6 +17,14 @@ function MyApp({ Component, pageProps }) {
     setSolutionsData([...solutionsData, newSolution]);
   }
 
+  function updateSolution(updatedSolution) {
+    setSolutionsData(
+      solutionsData.map((sol) =>
+        sol.solution_Id === updatedSolution.solution_Id ? updatedSolution : sol
+      )
+    );
+  }
+
   function addModule(newModule, solutionId) {
     setModulesData([...modulesData, newModule]);
 
@@ -80,6 +88,7 @@ function MyApp({ Component, pageProps }) {
           modulesData={modulesData}
           personsData={personsData}
           addSolution={addSolution}
+          updateSolution={updateSolution}
           addModule={addModule}
           updateModule={updateModule}
           addPerson={addPerson}
