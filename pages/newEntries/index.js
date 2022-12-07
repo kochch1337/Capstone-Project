@@ -22,6 +22,13 @@ export default function NewEntries() {
       >
         new module
       </ButtonNew>
+      <ButtonNew
+        onClick={() => {
+          router.push("/createPerson");
+        }}
+      >
+        new person
+      </ButtonNew>
     </>
   );
 }

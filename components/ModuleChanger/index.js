@@ -11,7 +11,6 @@ import { useState } from "react";
 import { StyledHeader } from "../Card/Card.styled";
 import SnackBar from "../SnackBar";
 import PersonListItem from "../PersonListItem";
-import { useEffect } from "react";
 
 const maxModuleLength = 8;
 const minModuleLength = 2;
@@ -194,10 +193,9 @@ export default function ModuleChanger({
         </ul>
         {showSnack && (
           <SnackBar
-            text={"Solution saved"}
+            text={"Module saved"}
             onClose={() => {
-              console.log("on close started");
-              router.push(`/`);
+              router.push(`/modules`);
             }}
           />
         )}
