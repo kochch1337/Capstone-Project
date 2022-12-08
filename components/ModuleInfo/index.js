@@ -37,6 +37,12 @@ export default function ModuleInfo({ solution, module, personsData }) {
             </Link>
             - {module.module}
           </StyledCardTitle>
+          <ButtonNew type="button" variant="edit" onClick={editModule}>
+            Edit
+          </ButtonNew>
+          <ButtonNew type="button" variant="delete" onClick={editModule}>
+            Delete
+          </ButtonNew>
         </StyledCardContent>
         <StyledCardContent>
           <StyledCardContentElement>
@@ -119,11 +125,6 @@ export default function ModuleInfo({ solution, module, personsData }) {
                 );
               })}
             </StyledCardModuleList>
-          </StyledCardContentElement>
-          <StyledCardContentElement>
-            <ButtonNew type="button" onClick={editModule}>
-              edit
-            </ButtonNew>
           </StyledCardContentElement>
         </StyledCardContent>
       </StyledCard>

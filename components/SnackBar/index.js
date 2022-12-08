@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import StyledSnackbar from "./SnackBar.styled";
 
-export default function SnackBar({ text, onClose }) {
+export default function SnackBar({ text, onClose, backColor }) {
   const [showSnack, setShowSnack] = useState(true);
 
   useEffect(() => {
@@ -13,5 +13,7 @@ export default function SnackBar({ text, onClose }) {
     return () => clearTimeout(timeoutID);
   }, []);
 
-  return showSnack ? <StyledSnackbar>{text}</StyledSnackbar> : null;
+  return showSnack ? (
+    <StyledSnackbar backColor={backColor}>{text}</StyledSnackbar>
+  ) : null;
 }

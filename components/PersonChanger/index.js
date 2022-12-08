@@ -19,6 +19,8 @@ export default function PersonChanger({ addPerson, updatePerson, person }) {
   const router = useRouter();
 
   const [showSnack, setShowSnack] = useState(false);
+  const [showFirstSnack, setShowFirstSnack] = useState(false);
+  const [showLastSnack, setShowLastSnack] = useState(false);
 
   const [inputCounterFirstname, setInputCounterFirstname] =
     useState(maxFirstnameLength);
@@ -34,17 +36,13 @@ export default function PersonChanger({ addPerson, updatePerson, person }) {
 
     const firstName = person_firstname.trim();
     if (firstName.length === 0) {
-      alert(
-        `Please enter a firstname name with at least ${minFirstnameLength} chars that are not whitespaces`
-      );
+      setShowFirstSnack(true);
       return;
     }
 
     const lastName = person_lastname.trim();
     if (lastName.length === 0) {
-      alert(
-        `Please enter a lastname with at least ${minLastnameLength} chars that are not whitespaces`
-      );
+      setShowLastSnack(true);
       return;
     }
 
@@ -113,12 +111,27 @@ export default function PersonChanger({ addPerson, updatePerson, person }) {
         {showSnack && (
           <SnackBar
             text={"Person saved"}
+            backColor="green"
             onClose={() => {
               router.push(`/persons`);
             }}
           />
         )}
         {!showSnack && <p> </p>}
+        {showFirstSnack && (
+          <SnackBar
+            text={`Please enter a firstname name with at least ${minFirstnameLength} chars that are not whitespaces`}
+            backColor="red"
+          />
+        )}
+        {!showFirstSnack && <p> </p>}
+        {showLastSnack && (
+          <SnackBar
+            text={`Please enter a lastname name with at least ${minLastnameLength} chars that are not whitespaces`}
+            backColor="red"
+          />
+        )}
+        {!showLastSnack && <p> </p>}
         <ButtonContainer>
           <ButtonNew type="reset" variant="reset">
             Reset

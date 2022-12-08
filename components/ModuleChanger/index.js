@@ -18,6 +18,7 @@ const minModuleLength = 2;
 
 export default function ModuleChanger({
   solutionsData,
+  modulesData,
   personsData,
   addModule,
   updateModule,
@@ -26,12 +27,18 @@ export default function ModuleChanger({
   const router = useRouter();
 
   const [showSnack, setShowSnack] = useState(false);
+  const [showSolutionSnack, setShowSolutionSnack] = useState(false);
+  const [showModuleSnack, setModuleShowSnack] = useState(false);
+  const [showDeveloperSnack, setShowDeveloperSnack] = useState(false);
+  const [showBpaSnack, setShowBpaSnack] = useState(false);
   const [inputCounterModule, setInputCounterModule] = useState(maxModuleLength);
   const [inputDeveloper, setInputDeveloper] = useState();
   const [devList, setDevList] = useState([]);
   const [inputBpa, setInputBpa] = useState();
   const [bpaList, setBpaList] = useState([]);
+  const [moduleNameExists, setModuleNameExists] = useState();
   let preselectSolution;
+  let moduleName;
 
   if (module != undefined) {
     useEffect(() => {
@@ -53,40 +60,35 @@ export default function ModuleChanger({
 
     const { module_name, select_solution } = Object.fromEntries(data);
 
-    let moduleName = module_name.trim();
+    moduleName = module_name.trim();
     moduleName = moduleName.toUpperCase();
     if (moduleName.length === 0) {
-      alert(
-        `Please enter a solution name with at least ${minModuleLength} chars that are not whitespaces`
-      );
+      setShowSolutionSnack(true);
       return;
     }
 
-    let moduleFound = false;
-    solutionsData.forEach((solution) => {
-      const found = solution.modules.find(
-        (module) => module.module === moduleName
-      );
+    console.log(modulesData);
+    console.log(moduleName);
 
-      if (found) {
-        moduleFound = found;
-      }
-    });
+    const moduleFound = modulesData.find(
+      (module) => module.module === moduleName
+    );
 
-    if (moduleFound) {
-      alert(
-        `Module ${moduleName} already exists. Please use another unique name`
-      );
+    console.log(moduleFound);
+
+    if (moduleFound != undefined) {
+      setModuleNameExists(moduleName);
+      setModuleShowSnack(true);
       return;
     }
 
     if (devList < 1) {
-      alert(`Please assaign at least one developer`);
+      setShowDeveloperSnack(true);
       return;
     }
 
     if (bpaList < 1) {
-      alert(`Please assaign at least one BPA`);
+      setShowBpaSnack(true);
       return;
     }
 
@@ -231,12 +233,38 @@ export default function ModuleChanger({
         {showSnack && (
           <SnackBar
             text={"Module saved"}
+            backColor="green"
             onClose={() => {
               router.push(`/modules`);
             }}
           />
         )}
         {!showSnack && <></>}
+        {showSolutionSnack && (
+          <SnackBar
+            text={`Please enter a module name with at least ${minModuleLength} chars that are not whitespaces`}
+            backColor="red"
+          />
+        )}
+        {!showSolutionSnack && <></>}
+        {showModuleSnack && (
+          <SnackBar
+            text={`Module ${moduleNameExists} already exists. Please use another unique name`}
+            backColor="red"
+          />
+        )}
+        {!showModuleSnack && <></>}
+        {showDeveloperSnack && (
+          <SnackBar
+            text={`Please assaign at least one developer`}
+            backColor="red"
+          />
+        )}
+        {!showDeveloperSnack && <></>}
+        {showBpaSnack && (
+          <SnackBar text={`Please assaign at least one BPA`} backColor="red" />
+        )}
+        {!showBpaSnack && <></>}
         <ButtonContainer>
           <ButtonNew type="reset" variant="reset">
             Reset

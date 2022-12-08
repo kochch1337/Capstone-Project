@@ -17,6 +17,7 @@ export default function Create({
     <>
       <ModuleChanger
         solutionsData={solutionsData}
+        modulesData={modulesData}
         personsData={personsData}
         module={module}
         addModule={addModule}

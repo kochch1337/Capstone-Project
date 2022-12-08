@@ -25,6 +25,12 @@ function MyApp({ Component, pageProps }) {
     );
   }
 
+  function deleteSolution(solution_Id) {
+    setSolutionsData((current) =>
+      current.filter((solution) => solution.solution_Id !== solution_Id)
+    );
+  }
+
   function addModule(newModule, solutionId) {
     setModulesData([...modulesData, newModule]);
 
@@ -66,6 +72,12 @@ function MyApp({ Component, pageProps }) {
     }
   }
 
+  function deleteModule(module_Id) {
+    setModulesData((current) =>
+      current.filter((module) => module.module_Id !== module_Id)
+    );
+  }
+
   function addPerson(newPerson) {
     setPersonsData([...personsData, newPerson]);
   }
@@ -75,6 +87,14 @@ function MyApp({ Component, pageProps }) {
       personsData.map((pers) =>
         pers.personal_Id === person.personal_Id ? person : pers
       )
+    );
+  }
+
+  function deletePerson(personel_Id) {
+    console.log(personel_Id);
+
+    setPersonsData((current) =>
+      current.filter((person) => person.personal_Id !== personel_Id)
     );
   }
 
@@ -89,10 +109,13 @@ function MyApp({ Component, pageProps }) {
           personsData={personsData}
           addSolution={addSolution}
           updateSolution={updateSolution}
+          deleteSolution={deleteSolution}
           addModule={addModule}
           updateModule={updateModule}
+          deleteModule={deleteModule}
           addPerson={addPerson}
           updatePerson={updatePerson}
+          deletePerson={deletePerson}
         />
       </Layout>
     </>

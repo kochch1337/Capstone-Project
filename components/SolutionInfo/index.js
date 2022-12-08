@@ -44,7 +44,14 @@ export default function SolutionInfo({ solution, modulesData, personsData }) {
             )}
             {solution.modules.length === 0 && solution.solution}
           </StyledCardTitle>
+          <ButtonNew type="button" variant="edit" onClick={editSolution}>
+            Edit
+          </ButtonNew>
+          <ButtonNew type="button" variant="delete" onClick={editSolution}>
+            Delete
+          </ButtonNew>
         </StyledCardContent>
+
         <StyledCardContent>
           <StyledCardContentElement>
             <b>Team: </b>
@@ -125,11 +132,6 @@ export default function SolutionInfo({ solution, modulesData, personsData }) {
               })}
             </StyledCardModuleList>
           </StyledCardContentElement>
-        </StyledCardContent>
-        <StyledCardContent>
-          <ButtonNew type="button" onClick={editSolution}>
-            Edit
-          </ButtonNew>
         </StyledCardContent>
       </StyledCard>
     </>
