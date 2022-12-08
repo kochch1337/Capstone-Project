@@ -1,5 +1,6 @@
 import { useRouter } from "next/router.js";
 import { StyledHeader } from "../../components/Card/Card.styled";
+import ButtonNew from "../../components/Button";
 
 export default function Persons({ solutionsData, personsData }) {
   const router = useRouter();
@@ -33,6 +34,15 @@ export default function Persons({ solutionsData, personsData }) {
     bpas = moduleData.bpa;
   }
 
+  function editPerson(event) {
+    const personal_id = event.target.parentElement.id;
+
+    router.push({
+      pathname: "/createPerson",
+      query: { personal_Id: personal_id },
+    });
+  }
+
   return (
     <>
       <StyledHeader>Persons</StyledHeader>
@@ -40,8 +50,11 @@ export default function Persons({ solutionsData, personsData }) {
         Developers:
         {devs.map((person) => {
           return (
-            <li key={person.personal_Id}>
-              {person.firstname} {person.lastname}
+            <li key={person.personal_Id} id={person.personal_Id}>
+              {person.firstname} {person.lastname}{" "}
+              <ButtonNew type="button" onClick={editPerson}>
+                Edit
+              </ButtonNew>
             </li>
           );
         })}
@@ -50,8 +63,11 @@ export default function Persons({ solutionsData, personsData }) {
         BPAs:
         {bpas.map((person) => {
           return (
-            <li key={person.personal_Id}>
-              {person.firstname} {person.lastname}
+            <li key={person.personal_Id} id={person.personal_Id}>
+              {person.firstname} {person.lastname}{" "}
+              <ButtonNew type="button" onClick={editPerson}>
+                Edit
+              </ButtonNew>
             </li>
           );
         })}

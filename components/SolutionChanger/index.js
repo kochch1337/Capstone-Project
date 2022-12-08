@@ -19,11 +19,12 @@ const minSupportGroupLength = 2;
 
 export default function SolutionChanger({
   solutionsData,
+  solution,
   personsData,
   addSolution,
+  updateSolution,
 }) {
   const router = useRouter();
-
   const [showSnack, setShowSnack] = useState(false);
 
   const [inputCounterSolution, setInputCounterSolution] =
@@ -82,20 +83,38 @@ export default function SolutionChanger({
       return;
     }
 
-    const newSolution = {
-      solution_Id: crypto.randomUUID(),
-      solution: solutionName,
-      team: teamName,
-      bpe: [bpe],
-      bseint: [bseint],
-      bsegr: [bsegr],
-      leadDeveloper: [leadDeveloper],
-      cbo: [cbo],
-      supportGroup: supportGroupName,
-      modules: [],
-    };
+    if (solution != undefined) {
+      const newSolution = {
+        solution_Id: solution.solution_Id,
+        solution: solutionName,
+        team: teamName,
+        bpe: [bpe],
+        bseint: [bseint],
+        bsegr: [bsegr],
+        leadDeveloper: [leadDeveloper],
+        cbo: [cbo],
+        supportGroup: supportGroupName,
+        modules: solution.modules,
+      };
 
-    addSolution(newSolution);
+      updateSolution(newSolution);
+    } else {
+      const newSolution = {
+        solution_Id: crypto.randomUUID(),
+        solution: solutionName,
+        team: teamName,
+        bpe: [bpe],
+        bseint: [bseint],
+        bsegr: [bsegr],
+        leadDeveloper: [leadDeveloper],
+        cbo: [cbo],
+        supportGroup: supportGroupName,
+        modules: [],
+      };
+
+      addSolution(newSolution);
+    }
+
     setShowSnack(true);
   }
 
@@ -108,6 +127,7 @@ export default function SolutionChanger({
           type="text"
           name="solution_name"
           id="solution_name"
+          defaultValue={solution != undefined ? solution.solution : ""}
           placeholder="Please enter the name of the solution (2-20 chars)"
           minLength={minSolutionLength}
           maxLength={maxSolutionLength}
@@ -126,6 +146,7 @@ export default function SolutionChanger({
           type="text"
           name="team_name"
           id="team_name"
+          defaultValue={solution != undefined ? solution.team : ""}
           placeholder="Please enter Team name"
           minLength={minTeamLength}
           maxLength={maxTeamLength}
@@ -142,6 +163,7 @@ export default function SolutionChanger({
           type="text"
           name="support_group"
           id="support_group"
+          defaultValue={solution != undefined ? solution.supportGroup : ""}
           placeholder="Please enter the name of the support group"
           minLength={minSupportGroupLength}
           maxLength={maxSupportGroupLength}
@@ -160,30 +182,45 @@ export default function SolutionChanger({
           filter="bc"
           responsibility="bpe"
           titleHeader="BPE"
+          defaultPerson={
+            solution != undefined ? solution.bpe[0].toString() : ""
+          }
         />
         <SelectPerson
           personsData={personsData}
           filter="bc"
           responsibility="bseint"
           titleHeader="BSEINT"
+          defaultPerson={
+            solution != undefined ? solution.bseint[0].toString() : ""
+          }
         />
         <SelectPerson
           personsData={personsData}
           filter="bc"
           responsibility="bsegr"
           titleHeader="BSEGR"
+          defaultPerson={
+            solution != undefined ? solution.bsegr[0].toString() : ""
+          }
         />
         <SelectPerson
           personsData={personsData}
           filter="dev"
           responsibility="leadDeveloper"
           titleHeader="Lead Developer"
+          defaultPerson={
+            solution != undefined ? solution.leadDeveloper[0].toString() : ""
+          }
         />
         <SelectPerson
           personsData={personsData}
           filter="bc"
           responsibility="cbo"
           titleHeader="CBO"
+          defaultPerson={
+            solution != undefined ? solution.cbo[0].toString() : ""
+          }
         />
         {showSnack && (
           <SnackBar
@@ -199,7 +236,7 @@ export default function SolutionChanger({
             Reset
           </ButtonNew>
           <ButtonNew type="submit" variant="submit">
-            Add new Solution
+            {solution != undefined ? "update" : "save"}
           </ButtonNew>
         </ButtonContainer>
       </FormsBase>

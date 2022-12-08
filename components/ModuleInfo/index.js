@@ -7,11 +7,24 @@ import {
   StyledCardModuleList,
   StyledCardModuleListItem,
 } from "../Card/Card.styled";
+import ButtonNew from "../Button";
+import { useRouter } from "next/router.js";
 
 export default function ModuleInfo({ solution, module, personsData }) {
+  const router = useRouter();
+
+  function editModule(event) {
+    event.preventDefault();
+    const module_id = event.target.parentElement.parentElement.parentElement.id;
+    router.push({
+      pathname: "/createModule",
+      query: { module_Id: module_id },
+    });
+  }
+
   return (
     <>
-      <StyledCard key={module.module}>
+      <StyledCard key={module.module_Id} id={module.module_Id}>
         <StyledCardContent>
           <StyledCardTitle>
             <Link
@@ -106,6 +119,11 @@ export default function ModuleInfo({ solution, module, personsData }) {
                 );
               })}
             </StyledCardModuleList>
+          </StyledCardContentElement>
+          <StyledCardContentElement>
+            <ButtonNew type="button" onClick={editModule}>
+              edit
+            </ButtonNew>
           </StyledCardContentElement>
         </StyledCardContent>
       </StyledCard>

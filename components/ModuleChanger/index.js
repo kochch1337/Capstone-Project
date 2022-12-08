@@ -11,6 +11,7 @@ import { useState } from "react";
 import { StyledHeader } from "../Card/Card.styled";
 import SnackBar from "../SnackBar";
 import PersonListItem from "../PersonListItem";
+import { useEffect } from "react";
 
 const maxModuleLength = 8;
 const minModuleLength = 2;
@@ -19,6 +20,8 @@ export default function ModuleChanger({
   solutionsData,
   personsData,
   addModule,
+  updateModule,
+  module,
 }) {
   const router = useRouter();
 
@@ -28,6 +31,21 @@ export default function ModuleChanger({
   const [devList, setDevList] = useState([]);
   const [inputBpa, setInputBpa] = useState();
   const [bpaList, setBpaList] = useState([]);
+  let preselectSolution;
+
+  if (module != undefined) {
+    useEffect(() => {
+      setDevList(module.developer);
+      setBpaList(module.bpa);
+
+      setInputDeveloper(module.developer[0]);
+      setInputBpa(module.bpa[0]);
+    }, []);
+
+    preselectSolution = solutionsData.find((sol) =>
+      sol.modules.includes(module.module_Id)
+    );
+  }
 
   function onSubmit(event) {
     event.preventDefault();
@@ -76,24 +94,37 @@ export default function ModuleChanger({
       (sol) => sol.solution_Id === select_solution
     );
 
-    const newModule = {
-      module_Id: crypto.randomUUID(),
-      module: moduleName,
-      developer: devList,
-      bpa: bpaList,
-    };
+    if (module != undefined) {
+      const newModule = {
+        module_Id: module.module_Id,
+        module: moduleName,
+        developer: devList,
+        bpa: bpaList,
+      };
 
-    addModule(newModule, solution.solution_Id);
+      updateModule(
+        newModule,
+        solution.solution_Id,
+        preselectSolution.solution_Id
+      );
+    } else {
+      const newModule = {
+        module_Id: crypto.randomUUID(),
+        module: moduleName,
+        developer: devList,
+        bpa: bpaList,
+      };
+
+      addModule(newModule, solution.solution_Id);
+    }
 
     setShowSnack(true);
   }
 
   function addDeveloper() {
-    const personalIdAsString = inputDeveloper.toString();
-
     if (inputDeveloper === undefined || inputDeveloper === "noSelect") {
-      console.log("No person selected");
     } else {
+      const personalIdAsString = inputDeveloper.toString();
       if (!devList.includes(personalIdAsString)) {
         setDevList((devList) => [...devList, personalIdAsString]);
       }
@@ -107,11 +138,9 @@ export default function ModuleChanger({
   }
 
   function addBpa() {
-    const personalIdAsString = inputBpa.toString();
-
     if (inputBpa === undefined || inputBpa === "noSelect") {
-      console.log("No person selected");
     } else {
+      const personalIdAsString = inputBpa.toString();
       if (!bpaList.includes(personalIdAsString)) {
         setBpaList((bpaList) => [...bpaList, personalIdAsString]);
       }
@@ -128,12 +157,16 @@ export default function ModuleChanger({
     <>
       <StyledHeader>Add new solution</StyledHeader>
       <FormsBase onSubmit={onSubmit}>
-        <SelectSolution solutionsData={solutionsData}></SelectSolution>
+        <SelectSolution
+          solutionsData={solutionsData}
+          preselectSolution={preselectSolution}
+        ></SelectSolution>
         <label htmlFor="module_name">New Module:</label>
         <input
           type="text"
           name="module_name"
           id="module_name"
+          defaultValue={module != undefined ? module.module : ""}
           placeholder="Please enter Module name"
           minLength={minModuleLength}
           maxLength={maxModuleLength}
@@ -148,6 +181,9 @@ export default function ModuleChanger({
           filter="dev"
           responsibility="dev"
           titleHeader="Developer"
+          defaultPerson={
+            module != undefined ? module.developer[0].toString() : ""
+          }
           onChange={(event) => setInputDeveloper(event.target.value)}
         />
         <ButtonNew type="button" onClick={addDeveloper}>
@@ -172,6 +208,7 @@ export default function ModuleChanger({
           filter="bc"
           responsibility="bpa"
           titleHeader="BPA:"
+          defaultPerson={module != undefined ? module.bpa[0].toString() : ""}
           onChange={(event) => setInputBpa(event.target.value)}
         />
         <ButtonNew type="button" onClick={addBpa}>
@@ -205,7 +242,7 @@ export default function ModuleChanger({
             Reset
           </ButtonNew>
           <ButtonNew type="submit" variant="submit">
-            Add new Module
+            {module != undefined ? "update" : "save"}
           </ButtonNew>
         </ButtonContainer>
       </FormsBase>

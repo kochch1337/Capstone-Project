@@ -1,6 +1,7 @@
 import { useRouter } from "next/router.js";
 import { StyledHeader } from "../../components/Card/Card.styled";
 import ButtonNew from "../../components/Button";
+import { StyledButtonContainerCentered } from "../../components/Button/Button.styled";
 
 export default function NewEntries() {
   const router = useRouter();
@@ -8,27 +9,29 @@ export default function NewEntries() {
   return (
     <>
       <StyledHeader>add new</StyledHeader>
-      <ButtonNew
-        onClick={() => {
-          router.push("/createSolution");
-        }}
-      >
-        new solution
-      </ButtonNew>
-      <ButtonNew
-        onClick={() => {
-          router.push("/createModule");
-        }}
-      >
-        new module
-      </ButtonNew>
-      <ButtonNew
-        onClick={() => {
-          router.push("/createPerson");
-        }}
-      >
-        new person
-      </ButtonNew>
+      <StyledButtonContainerCentered>
+        <ButtonNew
+          onClick={() => {
+            router.push("/createSolution");
+          }}
+        >
+          solution
+        </ButtonNew>
+        <ButtonNew
+          onClick={() => {
+            router.push("/createModule");
+          }}
+        >
+          module
+        </ButtonNew>
+        <ButtonNew
+          onClick={() => {
+            router.push("/createPerson");
+          }}
+        >
+          person
+        </ButtonNew>
+      </StyledButtonContainerCentered>
     </>
   );
 }
