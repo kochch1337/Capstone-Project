@@ -67,19 +67,16 @@ export default function ModuleChanger({
       return;
     }
 
-    console.log(modulesData);
-    console.log(moduleName);
+    if (module === undefined) {
+      const moduleFound = modulesData.find(
+        (module) => module.module === moduleName
+      );
 
-    const moduleFound = modulesData.find(
-      (module) => module.module === moduleName
-    );
-
-    console.log(moduleFound);
-
-    if (moduleFound != undefined) {
-      setModuleNameExists(moduleName);
-      setModuleShowSnack(true);
-      return;
+      if (moduleFound != undefined) {
+        setModuleNameExists(moduleName);
+        setModuleShowSnack(true);
+        return;
+      }
     }
 
     if (devList < 1) {
@@ -256,13 +253,13 @@ export default function ModuleChanger({
         {!showModuleSnack && <></>}
         {showDeveloperSnack && (
           <SnackBar
-            text={`Please assaign at least one developer`}
+            text={`Please assign at least one developer`}
             backColor="red"
           />
         )}
         {!showDeveloperSnack && <></>}
         {showBpaSnack && (
-          <SnackBar text={`Please assaign at least one BPA`} backColor="red" />
+          <SnackBar text={`Please assign at least one BPA`} backColor="red" />
         )}
         {!showBpaSnack && <></>}
         <ButtonContainer>

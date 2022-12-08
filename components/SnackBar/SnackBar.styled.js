@@ -8,11 +8,20 @@ const StyledSnackbar = styled.p`
   background-color: ${(props) => props.backColor};
   border-radius: 5px;
   color: white;
+`;
+
+const StyledSnackContainer = styled.div`
   position: fixed;
-  z-index: 10;
+  display: flexbox;
+  flex-wrap: wrap;
+  align-items: center;
+  min-height: 250px;
+  min-width: 250px;
+  z-index: 1;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background-color: ${(props) => props.backColor};
 `;
 
-export default StyledSnackbar;
+export { StyledSnackbar, StyledSnackContainer };

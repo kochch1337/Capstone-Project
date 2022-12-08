@@ -9,9 +9,17 @@ import {
 } from "../Card/Card.styled";
 import ButtonNew from "../Button";
 import { useRouter } from "next/router.js";
+import SnackBar from "../SnackBar";
+import { useState } from "react";
 
-export default function SolutionInfo({ solution, modulesData, personsData }) {
+export default function SolutionInfo({
+  solution,
+  modulesData,
+  personsData,
+  deleteSolution,
+}) {
   const router = useRouter();
+  const [showSnack, setShowSnack] = useState(false);
 
   function editSolution(event) {
     event.preventDefault();
@@ -22,6 +30,18 @@ export default function SolutionInfo({ solution, modulesData, personsData }) {
       pathname: "/createSolution",
       query: { solution_Id: solution_id },
     });
+  }
+
+  function removeSolution(event) {
+    event.preventDefault();
+    const solution_id = event.target.parentElement.parentElement.id;
+
+    if (solution.modules.length > 0) {
+      console.log("Solution has still modules please remove first");
+    } else {
+      deleteSolution(solution_id);
+      setShowSnack(true);
+    }
   }
 
   return (
@@ -47,7 +67,7 @@ export default function SolutionInfo({ solution, modulesData, personsData }) {
           <ButtonNew type="button" variant="edit" onClick={editSolution}>
             Edit
           </ButtonNew>
-          <ButtonNew type="button" variant="delete" onClick={editSolution}>
+          <ButtonNew type="button" variant="delete" onClick={removeSolution}>
             Delete
           </ButtonNew>
         </StyledCardContent>
@@ -134,6 +154,8 @@ export default function SolutionInfo({ solution, modulesData, personsData }) {
           </StyledCardContentElement>
         </StyledCardContent>
       </StyledCard>
+      {showSnack && <SnackBar text={"Solution deleted"} backColor="green" />}
+      {!showSnack && <></>}
     </>
   );
 }

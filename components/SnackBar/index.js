@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import StyledSnackbar from "./SnackBar.styled";
+import { StyledSnackbar, StyledSnackContainer } from "./SnackBar.styled";
 
 export default function SnackBar({ text, onClose, backColor }) {
   const [showSnack, setShowSnack] = useState(true);
@@ -14,6 +14,8 @@ export default function SnackBar({ text, onClose, backColor }) {
   }, []);
 
   return showSnack ? (
-    <StyledSnackbar backColor={backColor}>{text}</StyledSnackbar>
+    <StyledSnackContainer>
+      <StyledSnackbar backColor={backColor}>{text}</StyledSnackbar>
+    </StyledSnackContainer>
   ) : null;
 }

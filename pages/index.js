@@ -5,7 +5,12 @@ import {
   StyledListContainer,
 } from "../components/Card/Card.styled";
 
-export default function Solution({ solutionsData, modulesData, personsData }) {
+export default function Solution({
+  solutionsData,
+  modulesData,
+  personsData,
+  deleteSolution,
+}) {
   const router = useRouter();
 
   return (
@@ -19,6 +24,7 @@ export default function Solution({ solutionsData, modulesData, personsData }) {
               solution={solution}
               modulesData={modulesData}
               personsData={personsData}
+              deleteSolution={deleteSolution}
             />
           );
         })}
