@@ -24,4 +24,12 @@ const ButtonStyled = styled.button`
   }
 `;
 
-export { ButtonStyled };
+const StyledButtonContainerCentered = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+export { ButtonStyled, StyledButtonContainerCentered };

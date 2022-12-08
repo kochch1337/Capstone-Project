@@ -47,13 +47,15 @@ export default function SolutionInfo({ solution, modulesData, personsData }) {
         </StyledCardContent>
         <StyledCardContent>
           <StyledCardContentElement>
-            Team: {solution.team}
+            <b>Team: </b>
+            {solution.team}
           </StyledCardContentElement>
           <StyledCardContentElement>
-            SupportGroup: {solution.supportGroup}
+            <b>SupportGroup: </b>
+            {solution.supportGroup}
           </StyledCardContentElement>
           <StyledCardContentElement>
-            BPE:
+            <b>BPE: </b>
             {solution.bpe.map((personalid) => {
               const person = personsData.find(
                 (pers) => pers.personal_Id == personalid
@@ -62,7 +64,7 @@ export default function SolutionInfo({ solution, modulesData, personsData }) {
             })}
           </StyledCardContentElement>
           <StyledCardContentElement>
-            BSEINT:{" "}
+            <b>BSEINT: </b>
             {solution.bseint.map((personalid) => {
               const person = personsData.find(
                 (pers) => pers.personal_Id == personalid
@@ -71,7 +73,7 @@ export default function SolutionInfo({ solution, modulesData, personsData }) {
             })}
           </StyledCardContentElement>
           <StyledCardContentElement>
-            BSEGR:{" "}
+            <b>BSEGR: </b>
             {solution.bsegr.map((personalid) => {
               const person = personsData.find(
                 (pers) => pers.personal_Id == personalid
@@ -80,7 +82,7 @@ export default function SolutionInfo({ solution, modulesData, personsData }) {
             })}
           </StyledCardContentElement>
           <StyledCardContentElement>
-            Lead Developer:{" "}
+            <b>Lead Developer: </b>
             {solution.leadDeveloper.map((personalid) => {
               const person = personsData.find(
                 (pers) => pers.personal_Id == personalid
@@ -89,7 +91,7 @@ export default function SolutionInfo({ solution, modulesData, personsData }) {
             })}
           </StyledCardContentElement>
           <StyledCardContentElement>
-            CBO:{" "}
+            <b>CBO: </b>
             {solution.cbo.map((personalid) => {
               const person = personsData.find(
                 (pers) => pers.personal_Id == personalid
@@ -99,7 +101,7 @@ export default function SolutionInfo({ solution, modulesData, personsData }) {
           </StyledCardContentElement>
           <StyledCardContentElement>
             <StyledCardModuleList>
-              Modules:
+              <b>Modules:</b>
               {solution.modules.map((moduleid) => {
                 const module = modulesData.find(
                   (moduledata) => moduledata.module_Id === moduleid
