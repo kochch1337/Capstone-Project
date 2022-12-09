@@ -159,7 +159,7 @@ export default function SolutionInfo({
       {!showSnack && <></>}
       {showModulesSnack && (
         <SnackBar
-          text={`Solution has still modules please remove first`}
+          text={`Solution has still modules, please remove them first`}
           backColor="red"
           setParentSnackState={setShowModulesSnack}
         />
