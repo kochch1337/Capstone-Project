@@ -9,17 +9,58 @@ import {
 } from "../Card/Card.styled";
 import ButtonNew from "../Button";
 import { useRouter } from "next/router.js";
+import Fuse from "fuse.js";
+import SnackBar from "../SnackBar";
+import { useState } from "react";
 
-export default function ModuleInfo({ solution, module, personsData }) {
+export default function ModuleInfo({
+  solution,
+  module,
+  solutionsData,
+  personsData,
+  deleteModule,
+}) {
   const router = useRouter();
+
+  const [showSnack, setShowSnack] = useState(false);
+
+  const searchOptionsSolutions = {
+    includeScore: true,
+    includeMatches: true,
+    useExtendedSearch: true,
+    keys: ["modules"],
+  };
 
   function editModule(event) {
     event.preventDefault();
-    const module_id = event.target.parentElement.parentElement.parentElement.id;
+    const module_id = event.target.parentElement.parentElement.id;
     router.push({
       pathname: "/createModule",
       query: { module_Id: module_id },
     });
+  }
+
+  function removeModule(event) {
+    event.preventDefault();
+    const module_id = event.target.parentElement.parentElement.id;
+
+    const fuse = new Fuse(solutionsData, searchOptionsSolutions);
+    const moduleResult = fuse.search(`=${module_id}`);
+
+    if (moduleResult.length > 0) {
+      if (
+        confirm(
+          "Module is still in use! Do you really want to delete this module?"
+        )
+      ) {
+        const solutionId = moduleResult[0].item.solution_Id;
+        deleteModule(module_id, solutionId);
+        setShowSnack(true);
+      }
+    } else {
+      deleteModule(module_id);
+      setShowSnack(true);
+    }
   }
 
   return (
@@ -37,6 +78,12 @@ export default function ModuleInfo({ solution, module, personsData }) {
             </Link>
             - {module.module}
           </StyledCardTitle>
+          <ButtonNew type="button" variant="edit" onClick={editModule}>
+            Edit
+          </ButtonNew>
+          <ButtonNew type="button" variant="delete" onClick={removeModule}>
+            Delete
+          </ButtonNew>
         </StyledCardContent>
         <StyledCardContent>
           <StyledCardContentElement>
@@ -120,13 +167,10 @@ export default function ModuleInfo({ solution, module, personsData }) {
               })}
             </StyledCardModuleList>
           </StyledCardContentElement>
-          <StyledCardContentElement>
-            <ButtonNew type="button" onClick={editModule}>
-              edit
-            </ButtonNew>
-          </StyledCardContentElement>
         </StyledCardContent>
       </StyledCard>
+      {showSnack && <SnackBar text={`Module deleted`} backColor="green" />}
+      {!showSnack && <></>}
     </>
   );
 }

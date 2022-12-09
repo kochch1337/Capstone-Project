@@ -26,6 +26,7 @@ const StyledNavLink = styled(Link)`
   display: flex;
   justify-content: center;
   text-align: center;
+  text-decoration: none;
   width: 100%;
   height: 100%;
 

@@ -26,6 +26,11 @@ export default function SolutionChanger({
 }) {
   const router = useRouter();
   const [showSnack, setShowSnack] = useState(false);
+  const [showMinSolutionSnack, setShowMinSolutionSnack] = useState(false);
+  const [showMinTeamSnack, setShowMinTeamSnack] = useState(false);
+  const [showMinSuppSnack, setShowMinSuppSnack] = useState(false);
+  const [showSolutionSnack, setShowSolutionSnack] = useState(false);
+  const [usedSolutionName, setUsedSolutionName] = useState(false);
 
   const [inputCounterSolution, setInputCounterSolution] =
     useState(maxSolutionLength);
@@ -51,9 +56,7 @@ export default function SolutionChanger({
 
     const solutionName = solution_name.trim();
     if (solutionName.length === 0) {
-      alert(
-        `Please enter a solution name with at least ${minSolutionLength} chars that are not whitespaces`
-      );
+      setShowMinSolutionSnack(true);
       return;
     }
 
@@ -61,25 +64,20 @@ export default function SolutionChanger({
       solutionsData.filter((solution) => solution.solution === solutionName)
         .length > 0
     ) {
-      alert(
-        `Solution ${solutionName} already exists. Please choose a unique name.`
-      );
+      setUsedSolutionName(solutionName);
+      setShowSolutionSnack(true);
       return;
     }
 
     const teamName = team_name.trim();
     if (teamName.length === 0) {
-      alert(
-        `Please enter a team name with at least ${minTeamLength} chars that are not whitespaces`
-      );
+      setShowMinTeamSnack(true);
       return;
     }
 
     const supportGroupName = support_group.trim();
     if (supportGroupName.length === 0) {
-      alert(
-        `Please enter a support-group with at least ${minSupportGroupLength} chars that are not whitespaces`
-      );
+      setShowMinSuppSnack(true);
       return;
     }
 
@@ -231,6 +229,38 @@ export default function SolutionChanger({
           />
         )}
         {!showSnack && <p> </p>}
+        {showMinSolutionSnack && (
+          <SnackBar
+            text={`Please enter a solution name with at least ${minSolutionLength} chars that are not whitespaces`}
+            backColor="red"
+            setParentSnackState={setShowMinSolutionSnack}
+          />
+        )}
+        {!showMinSolutionSnack && <p> </p>}
+        {showSolutionSnack && (
+          <SnackBar
+            text={`Solution ${usedSolutionName} already exists. Please choose a unique name.`}
+            backColor="red"
+            setParentSnackState={setShowSolutionSnack}
+          />
+        )}
+        {!showSolutionSnack && <p> </p>}
+        {showMinTeamSnack && (
+          <SnackBar
+            text={`Please enter a team name with at least ${minTeamLength} chars that are not whitespaces`}
+            backColor="red"
+            setParentSnackState={setShowMinTeamSnack}
+          />
+        )}
+        {!showMinTeamSnack && <p> </p>}
+        {showMinSuppSnack && (
+          <SnackBar
+            text={`Please enter a support-group with at least ${minSupportGroupLength} chars that are not whitespaces`}
+            backColor="red"
+            setParentSnackState={setShowMinSuppSnack}
+          />
+        )}
+        {!showMinSuppSnack && <p> </p>}
         <ButtonContainer>
           <ButtonNew type="reset" variant="reset">
             Reset

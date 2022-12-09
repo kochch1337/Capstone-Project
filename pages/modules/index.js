@@ -5,7 +5,12 @@ import {
   StyledListContainer,
 } from "../../components/Card/Card.styled";
 
-export default function Modules({ solutionsData, modulesData, personsData }) {
+export default function Modules({
+  solutionsData,
+  modulesData,
+  personsData,
+  deleteModule,
+}) {
   const router = useRouter();
   const query = router.query;
 
@@ -47,8 +52,10 @@ export default function Modules({ solutionsData, modulesData, personsData }) {
                 key={module.module}
                 solution={solution}
                 module={module}
+                solutionsData={solutionsData}
                 modulesData={modulesData}
                 personsData={personsData}
+                deleteModule={deleteModule}
               />
             );
           });

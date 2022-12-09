@@ -9,9 +9,18 @@ import {
 } from "../Card/Card.styled";
 import ButtonNew from "../Button";
 import { useRouter } from "next/router.js";
+import SnackBar from "../SnackBar";
+import { useState } from "react";
 
-export default function SolutionInfo({ solution, modulesData, personsData }) {
+export default function SolutionInfo({
+  solution,
+  modulesData,
+  personsData,
+  deleteSolution,
+}) {
   const router = useRouter();
+  const [showSnack, setShowSnack] = useState(false);
+  const [showModulesSnack, setShowModulesSnack] = useState(false);
 
   function editSolution(event) {
     event.preventDefault();
@@ -22,6 +31,18 @@ export default function SolutionInfo({ solution, modulesData, personsData }) {
       pathname: "/createSolution",
       query: { solution_Id: solution_id },
     });
+  }
+
+  function removeSolution(event) {
+    event.preventDefault();
+    const solution_id = event.target.parentElement.parentElement.id;
+
+    if (solution.modules.length > 0) {
+      setShowModulesSnack(true);
+    } else {
+      deleteSolution(solution_id);
+      setShowSnack(true);
+    }
   }
 
   return (
@@ -44,7 +65,14 @@ export default function SolutionInfo({ solution, modulesData, personsData }) {
             )}
             {solution.modules.length === 0 && solution.solution}
           </StyledCardTitle>
+          <ButtonNew type="button" variant="edit" onClick={editSolution}>
+            Edit
+          </ButtonNew>
+          <ButtonNew type="button" variant="delete" onClick={removeSolution}>
+            Delete
+          </ButtonNew>
         </StyledCardContent>
+
         <StyledCardContent>
           <StyledCardContentElement>
             <b>Team: </b>
@@ -126,12 +154,17 @@ export default function SolutionInfo({ solution, modulesData, personsData }) {
             </StyledCardModuleList>
           </StyledCardContentElement>
         </StyledCardContent>
-        <StyledCardContent>
-          <ButtonNew type="button" onClick={editSolution}>
-            Edit
-          </ButtonNew>
-        </StyledCardContent>
       </StyledCard>
+      {showSnack && <SnackBar text={"Solution deleted"} backColor="green" />}
+      {!showSnack && <></>}
+      {showModulesSnack && (
+        <SnackBar
+          text={`Solution has still modules, please remove them first`}
+          backColor="red"
+          setParentSnackState={setShowModulesSnack}
+        />
+      )}
+      {!showModulesSnack && <p> </p>}
     </>
   );
 }

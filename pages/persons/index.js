@@ -1,13 +1,35 @@
 import { useRouter } from "next/router.js";
 import { StyledHeader } from "../../components/Card/Card.styled";
 import ButtonNew from "../../components/Button";
+import Fuse from "fuse.js";
+import { useState } from "react";
+import SnackBar from "../../components/SnackBar";
 
-export default function Persons({ solutionsData, personsData }) {
+export default function Persons({
+  solutionsData,
+  modulesData,
+  personsData,
+  deletePerson,
+}) {
   const router = useRouter();
   const query = router.query;
-
+  const [showSnack, setShowSnack] = useState(false);
   const solutionid = query.SolutionId;
   const moduleName = query.Module;
+
+  const searchOptionsModule = {
+    includeScore: true,
+    includeMatches: true,
+    useExtendedSearch: true,
+    keys: ["developer", "bpa"],
+  };
+
+  const searchOptionsSolutions = {
+    includeScore: true,
+    includeMatches: true,
+    useExtendedSearch: true,
+    keys: ["bpe", "bseint", "bsegr", "leadDeveloper", "cbo"],
+  };
 
   let devs = personsData.filter((dev) => dev.role === "dev");
   let bpas = personsData.filter((dev) => dev.role === "bc");
@@ -43,6 +65,20 @@ export default function Persons({ solutionsData, personsData }) {
     });
   }
 
+  function removePerson(event) {
+    const personal_id = event.target.parentElement.id;
+    const fuse = new Fuse(modulesData, searchOptionsModule);
+    const solfuse = new Fuse(solutionsData, searchOptionsSolutions);
+    const solutionResult = solfuse.search(`=${personal_id}`);
+    const moduleResult = fuse.search(`=${personal_id}`);
+
+    if (solutionResult.length > 0 || moduleResult.length > 0) {
+      setShowSnack(true);
+    } else {
+      deletePerson(personal_id);
+    }
+  }
+
   return (
     <>
       <StyledHeader>Persons</StyledHeader>
@@ -54,6 +90,9 @@ export default function Persons({ solutionsData, personsData }) {
               {person.firstname} {person.lastname}{" "}
               <ButtonNew type="button" onClick={editPerson}>
                 Edit
+              </ButtonNew>
+              <ButtonNew type="button" onClick={removePerson}>
+                delete
               </ButtonNew>
             </li>
           );
@@ -68,10 +107,21 @@ export default function Persons({ solutionsData, personsData }) {
               <ButtonNew type="button" onClick={editPerson}>
                 Edit
               </ButtonNew>
+              <ButtonNew type="button" onClick={removePerson}>
+                delete
+              </ButtonNew>
             </li>
           );
         })}
       </ul>
+      {showSnack && (
+        <SnackBar
+          text={"Person still in use, abort deletion"}
+          backColor="red"
+          setParentSnackState={setShowSnack}
+        />
+      )}
+      {!showSnack && <></>}
     </>
   );
 }
