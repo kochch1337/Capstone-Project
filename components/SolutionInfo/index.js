@@ -20,6 +20,7 @@ export default function SolutionInfo({
 }) {
   const router = useRouter();
   const [showSnack, setShowSnack] = useState(false);
+  const [showModulesSnack, setShowModulesSnack] = useState(false);
 
   function editSolution(event) {
     event.preventDefault();
@@ -37,7 +38,7 @@ export default function SolutionInfo({
     const solution_id = event.target.parentElement.parentElement.id;
 
     if (solution.modules.length > 0) {
-      console.log("Solution has still modules please remove first");
+      setShowModulesSnack(true);
     } else {
       deleteSolution(solution_id);
       setShowSnack(true);
@@ -156,6 +157,14 @@ export default function SolutionInfo({
       </StyledCard>
       {showSnack && <SnackBar text={"Solution deleted"} backColor="green" />}
       {!showSnack && <></>}
+      {showModulesSnack && (
+        <SnackBar
+          text={`Solution has still modules please remove first`}
+          backColor="red"
+          setParentSnackState={setShowModulesSnack}
+        />
+      )}
+      {!showModulesSnack && <p> </p>}
     </>
   );
 }

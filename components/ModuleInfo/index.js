@@ -42,18 +42,21 @@ export default function ModuleInfo({
 
   function removeModule(event) {
     event.preventDefault();
-    console.log(event.target);
     const module_id = event.target.parentElement.parentElement.id;
-    console.log(module_id);
 
     const fuse = new Fuse(solutionsData, searchOptionsSolutions);
     const moduleResult = fuse.search(`=${module_id}`);
 
-    console.log(fuse);
-    console.log(moduleResult);
-
     if (moduleResult.length > 0) {
-      console.log("Module still in use, abort deletion");
+      if (
+        confirm(
+          "Module is still in use! Do you really want to delete this module?"
+        )
+      ) {
+        const solutionId = moduleResult[0].item.solution_Id;
+        deleteModule(module_id, solutionId);
+        setShowSnack(true);
+      }
     } else {
       deleteModule(module_id);
       setShowSnack(true);

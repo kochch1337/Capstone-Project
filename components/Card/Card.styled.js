@@ -45,9 +45,10 @@ const StyledListContainer = styled.ul`
   padding 1% 1% 10% 1%
 `;
 
-const StyledHeader = styled.h1`
+const StyledHeader = styled.h2`
   color: #fff;
   background-color: #6e1e6e;
+  text-align: center;
 `;
 
 export {

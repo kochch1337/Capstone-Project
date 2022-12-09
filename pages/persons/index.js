@@ -2,6 +2,8 @@ import { useRouter } from "next/router.js";
 import { StyledHeader } from "../../components/Card/Card.styled";
 import ButtonNew from "../../components/Button";
 import Fuse from "fuse.js";
+import { useState } from "react";
+import SnackBar from "../../components/SnackBar";
 
 export default function Persons({
   solutionsData,
@@ -11,7 +13,7 @@ export default function Persons({
 }) {
   const router = useRouter();
   const query = router.query;
-
+  const [showSnack, setShowSnack] = useState(false);
   const solutionid = query.SolutionId;
   const moduleName = query.Module;
 
@@ -71,7 +73,7 @@ export default function Persons({
     const moduleResult = fuse.search(`=${personal_id}`);
 
     if (solutionResult.length > 0 || moduleResult.length > 0) {
-      console.log("Person still in use, abort deletion");
+      setShowSnack(true);
     } else {
       deletePerson(personal_id);
     }
@@ -112,6 +114,14 @@ export default function Persons({
           );
         })}
       </ul>
+      {showSnack && (
+        <SnackBar
+          text={"Person still in use, abort deletion"}
+          backColor="red"
+          setParentSnackState={setShowSnack}
+        />
+      )}
+      {!showSnack && <></>}
     </>
   );
 }

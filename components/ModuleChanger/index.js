@@ -241,6 +241,7 @@ export default function ModuleChanger({
           <SnackBar
             text={`Please enter a module name with at least ${minModuleLength} chars that are not whitespaces`}
             backColor="red"
+            setParentSnackState={setShowSolutionSnack}
           />
         )}
         {!showSolutionSnack && <></>}
@@ -248,6 +249,7 @@ export default function ModuleChanger({
           <SnackBar
             text={`Module ${moduleNameExists} already exists. Please use another unique name`}
             backColor="red"
+            setParentSnackState={setModuleShowSnack}
           />
         )}
         {!showModuleSnack && <></>}
@@ -255,11 +257,16 @@ export default function ModuleChanger({
           <SnackBar
             text={`Please assign at least one developer`}
             backColor="red"
+            setParentSnackState={setShowDeveloperSnack}
           />
         )}
         {!showDeveloperSnack && <></>}
         {showBpaSnack && (
-          <SnackBar text={`Please assign at least one BPA`} backColor="red" />
+          <SnackBar
+            text={`Please assign at least one BPA`}
+            backColor="red"
+            setParentSnackState={setShowBpaSnack}
+          />
         )}
         {!showBpaSnack && <></>}
         <ButtonContainer>

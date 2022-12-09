@@ -72,7 +72,23 @@ function MyApp({ Component, pageProps }) {
     }
   }
 
-  function deleteModule(module_Id) {
+  function deleteModule(module_Id, solution_Id) {
+    if (solution_Id != undefined) {
+      setSolutionsData(
+        solutionsData.map((sol) => {
+          let solution = { ...sol };
+
+          if (solution.solution_Id === solution_Id) {
+            solution.modules = solution.modules.filter(
+              (module) => module !== module_Id
+            );
+          }
+
+          return solution;
+        })
+      );
+    }
+
     setModulesData((current) =>
       current.filter((module) => module.module_Id !== module_Id)
     );
@@ -91,8 +107,6 @@ function MyApp({ Component, pageProps }) {
   }
 
   function deletePerson(personel_Id) {
-    console.log(personel_Id);
-
     setPersonsData((current) =>
       current.filter((person) => person.personal_Id !== personel_Id)
     );

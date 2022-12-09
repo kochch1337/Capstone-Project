@@ -122,6 +122,7 @@ export default function PersonChanger({ addPerson, updatePerson, person }) {
           <SnackBar
             text={`Please enter a firstname name with at least ${minFirstnameLength} chars that are not whitespaces`}
             backColor="red"
+            setParentSnackState={setShowFirstSnack}
           />
         )}
         {!showFirstSnack && <p> </p>}
@@ -129,6 +130,7 @@ export default function PersonChanger({ addPerson, updatePerson, person }) {
           <SnackBar
             text={`Please enter a lastname name with at least ${minLastnameLength} chars that are not whitespaces`}
             backColor="red"
+            setParentSnackState={setShowLastSnack}
           />
         )}
         {!showLastSnack && <p> </p>}
