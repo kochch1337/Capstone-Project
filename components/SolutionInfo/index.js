@@ -72,7 +72,6 @@ export default function SolutionInfo({
             Delete
           </ButtonNew>
         </StyledCardContent>
-
         <StyledCardContent>
           <StyledCardContentElement>
             <b>Team: </b>
@@ -88,7 +87,20 @@ export default function SolutionInfo({
               const person = personsData.find(
                 (pers) => pers.personal_Id == personalid
               );
-              return ` ${person.firstname} ${person.lastname}`;
+              return (
+                <Link
+                  key={personalid}
+                  href={{
+                    pathname: "/persons",
+                    query: {
+                      personal_Id: personalid,
+                    },
+                  }}
+                  passHref
+                >
+                  {person.firstname} {person.lastname}
+                </Link>
+              );
             })}
           </StyledCardContentElement>
           <StyledCardContentElement>
@@ -97,7 +109,20 @@ export default function SolutionInfo({
               const person = personsData.find(
                 (pers) => pers.personal_Id == personalid
               );
-              return `${person.firstname} ${person.lastname}`;
+              return (
+                <Link
+                  key={personalid}
+                  href={{
+                    pathname: "/persons",
+                    query: {
+                      personal_Id: personalid,
+                    },
+                  }}
+                  passHref
+                >
+                  {person.firstname} {person.lastname}
+                </Link>
+              );
             })}
           </StyledCardContentElement>
           <StyledCardContentElement>
@@ -106,7 +131,20 @@ export default function SolutionInfo({
               const person = personsData.find(
                 (pers) => pers.personal_Id == personalid
               );
-              return `${person.firstname} ${person.lastname}`;
+              return (
+                <Link
+                  key={personalid}
+                  href={{
+                    pathname: "/persons",
+                    query: {
+                      personal_Id: personalid,
+                    },
+                  }}
+                  passHref
+                >
+                  {person.firstname} {person.lastname}
+                </Link>
+              );
             })}
           </StyledCardContentElement>
           <StyledCardContentElement>
@@ -115,7 +153,20 @@ export default function SolutionInfo({
               const person = personsData.find(
                 (pers) => pers.personal_Id == personalid
               );
-              return `${person.firstname} ${person.lastname}`;
+              return (
+                <Link
+                  key={personalid}
+                  href={{
+                    pathname: "/persons",
+                    query: {
+                      personal_Id: personalid,
+                    },
+                  }}
+                  passHref
+                >
+                  {person.firstname} {person.lastname}
+                </Link>
+              );
             })}
           </StyledCardContentElement>
           <StyledCardContentElement>
@@ -124,7 +175,20 @@ export default function SolutionInfo({
               const person = personsData.find(
                 (pers) => pers.personal_Id == personalid
               );
-              return `${person.firstname} ${person.lastname}`;
+              return (
+                <Link
+                  key={personalid}
+                  href={{
+                    pathname: "/persons",
+                    query: {
+                      personal_Id: personalid,
+                    },
+                  }}
+                  passHref
+                >
+                  {person.firstname} {person.lastname}
+                </Link>
+              );
             })}
           </StyledCardContentElement>
           <StyledCardContentElement>
@@ -137,6 +201,7 @@ export default function SolutionInfo({
                 return (
                   <StyledCardModuleListItem key={module.module}>
                     <Link
+                      key={module.module_Id}
                       href={{
                         pathname: "/modules",
                         query: {

@@ -2,10 +2,7 @@ import Link from "next/link";
 import {
   StyledCard,
   StyledCardContent,
-  StyledCardContentElement,
   StyledCardTitle,
-  StyledCardModuleList,
-  StyledCardModuleListItem,
   StyledCardPersonElement,
   StyledCardPersonList,
   StyledCardPersonListItem,
@@ -19,7 +16,6 @@ import { useState } from "react";
 export default function PersonInfo({
   solutionsData,
   modulesData,
-  personsData,
   person,
   deletePerson,
 }) {
@@ -34,35 +30,17 @@ export default function PersonInfo({
     keys: ["bpe", "bseint", "bsegr", "leadDeveloper", "cbo"],
   };
 
+  const searchOptionsSolutionsModules = {
+    includeMatches: true,
+    useExtendedSearch: true,
+    keys: ["modules"],
+  };
+
   const searchOptionsModuleDetails = {
     includeMatches: true,
     useExtendedSearch: true,
     keys: ["developer", "bpa"],
   };
-
-  function editPerson(event) {
-    const personal_id = event.target.parentElement.parentElement.id;
-
-    router.push({
-      pathname: "/createPerson",
-      query: { personal_Id: personal_id },
-    });
-  }
-
-  function removePerson(event) {
-    const personal_id = event.target.parentElement.parentElement.id;
-    const fuse = new Fuse(modulesData, searchOptionsModule);
-    const solfuse = new Fuse(solutionsData, searchOptionsSolutions);
-    const solutionResult = solfuse.search(`=${personal_id}`);
-    const moduleResult = fuse.search(`=${personal_id}`);
-
-    if (solutionResult.length > 0 || moduleResult.length > 0) {
-      setShowPersonInUseSnack(true);
-    } else {
-      setShowSnack(true);
-      deletePerson(personal_id);
-    }
-  }
 
   const personal_id = person.personal_Id;
   const fuse = new Fuse(modulesData, searchOptionsModuleDetails);
@@ -74,9 +52,33 @@ export default function PersonInfo({
   let modulesAsBpa = [];
   let solutionsOverview = [];
 
+  function editPerson(event) {
+    const personal_id = event.target.parentElement.parentElement.id;
+
+    router.push({
+      pathname: "/createPerson",
+      query: { personal_Id: personal_id },
+    });
+  }
+
+  function removePerson(event) {
+    if (solutionResult.length > 0 || moduleResult.length > 0) {
+      setShowPersonInUseSnack(true);
+    } else {
+      setShowSnack(true);
+      deletePerson(personal_id);
+    }
+  }
+
   if (moduleResult.length > 0) {
     moduleResult.forEach((result) => {
-      const module = result.item.module;
+      const module = result.item;
+      const solMod = new Fuse(solutionsData, searchOptionsSolutionsModules);
+      const solModResult = solMod.search(`=${module.module_Id}`);
+
+      solModResult.forEach((res) => {
+        module.solution_Id = res.item.solution_Id;
+      });
 
       result.matches.forEach((match) => {
         if (match.key === "developer") {
@@ -115,8 +117,19 @@ export default function PersonInfo({
             </StyledCardPersonListItem>
             {modulesAsDeveloper.map((module) => {
               return (
-                <StyledCardPersonListItem key={module}>
-                  {module}
+                <StyledCardPersonListItem key={module.module_Id}>
+                  <Link
+                    href={{
+                      pathname: "/modules",
+                      query: {
+                        SolutionId: module.solution_Id,
+                        ModuleId: module.module_Id,
+                      },
+                    }}
+                    passHref
+                  >
+                    {module.module}
+                  </Link>
                 </StyledCardPersonListItem>
               );
             })}
@@ -136,8 +149,19 @@ export default function PersonInfo({
             </StyledCardPersonListItem>
             {modulesAsBpa.map((module) => {
               return (
-                <StyledCardPersonListItem key={module}>
-                  {module}
+                <StyledCardPersonListItem key={module.module_Id}>
+                  <Link
+                    href={{
+                      pathname: "/modules",
+                      query: {
+                        SolutionId: module.solution_Id,
+                        ModuleId: module.module_Id,
+                      },
+                    }}
+                    passHref
+                  >
+                    {module.module}
+                  </Link>
                 </StyledCardPersonListItem>
               );
             })}
@@ -158,7 +182,17 @@ export default function PersonInfo({
                   key={person.personal_Id + "_" + solObj.solution.solution_Id}
                 >
                   <StyledCardPersonListItem key={solObj.solution.solution_Id}>
-                    <b>{solObj.solution.solution}</b>
+                    <Link
+                      href={{
+                        pathname: "/",
+                        query: {
+                          SolutionId: solObj.solution.solution_Id,
+                        },
+                      }}
+                      passHref
+                    >
+                      <b>{solObj.solution.solution}</b>
+                    </Link>
                   </StyledCardPersonListItem>
                   {solObj.roles.map((role) => {
                     return (
@@ -182,15 +216,18 @@ export default function PersonInfo({
     <>
       <StyledCard key={person.personal_Id} id={person.personal_Id}>
         <StyledCardContent>
-          <StyledCardTitle>
-            {person.firstname} {person.lastname}
-          </StyledCardTitle>
           <ButtonNew type="button" variant="edit" onClick={editPerson}>
             Edit
           </ButtonNew>
           <ButtonNew type="button" variant="delete" onClick={removePerson}>
             Delete
           </ButtonNew>
+        </StyledCardContent>
+        <StyledCardContent>{person.role}</StyledCardContent>
+        <StyledCardContent>
+          <StyledCardTitle>
+            {person.firstname} {person.lastname}
+          </StyledCardTitle>
         </StyledCardContent>
         <StyledCardContent>
           <DeveloperList />

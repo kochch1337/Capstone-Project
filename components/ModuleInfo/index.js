@@ -71,6 +71,9 @@ export default function ModuleInfo({
             <Link
               href={{
                 pathname: "/",
+                query: {
+                  SolutionId: solution.solution_Id,
+                },
               }}
               passHref
             >
@@ -93,12 +96,25 @@ export default function ModuleInfo({
             SupportGroup: {solution.supportGroup}
           </StyledCardContentElement>
           <StyledCardContentElement>
-            BPE:{" "}
+            <b>BPE: </b>
             {solution.bpe.map((personalid) => {
               const person = personsData.find(
                 (pers) => pers.personal_Id == personalid
               );
-              return ` ${person.firstname} ${person.lastname}`;
+              return (
+                <Link
+                  key={personalid}
+                  href={{
+                    pathname: "/persons",
+                    query: {
+                      personal_Id: person.personal_Id,
+                    },
+                  }}
+                  passHref
+                >
+                  {person.firstname} {person.lastname}
+                </Link>
+              );
             })}
           </StyledCardContentElement>
           <StyledCardContentElement>
@@ -107,7 +123,20 @@ export default function ModuleInfo({
               const person = personsData.find(
                 (pers) => pers.personal_Id == personalid
               );
-              return `${person.firstname} ${person.lastname}`;
+              return (
+                <Link
+                  key={personalid}
+                  href={{
+                    pathname: "/persons",
+                    query: {
+                      personal_Id: person.personal_Id,
+                    },
+                  }}
+                  passHref
+                >
+                  {person.firstname} {person.lastname}
+                </Link>
+              );
             })}
           </StyledCardContentElement>
           <StyledCardContentElement>
@@ -116,8 +145,21 @@ export default function ModuleInfo({
               const person = personsData.find(
                 (pers) => pers.personal_Id == personalid
               );
-              return `${person.firstname} ${person.lastname}`;
-            })}{" "}
+              return (
+                <Link
+                  key={personalid}
+                  href={{
+                    pathname: "/persons",
+                    query: {
+                      personal_Id: person.personal_Id,
+                    },
+                  }}
+                  passHref
+                >
+                  {person.firstname} {person.lastname}
+                </Link>
+              );
+            })}
           </StyledCardContentElement>
           <StyledCardContentElement>
             Lead Developer:{" "}
@@ -125,7 +167,20 @@ export default function ModuleInfo({
               const person = personsData.find(
                 (pers) => pers.personal_Id == personalid
               );
-              return `${person.firstname} ${person.lastname}`;
+              return (
+                <Link
+                  key={personalid}
+                  href={{
+                    pathname: "/persons",
+                    query: {
+                      personal_Id: person.personal_Id,
+                    },
+                  }}
+                  passHref
+                >
+                  {person.firstname} {person.lastname}
+                </Link>
+              );
             })}
           </StyledCardContentElement>
           <StyledCardContentElement>
@@ -134,19 +189,45 @@ export default function ModuleInfo({
               const person = personsData.find(
                 (pers) => pers.personal_Id == personalid
               );
-              return `${person.firstname} ${person.lastname}`;
+              return (
+                <Link
+                  key={personalid}
+                  href={{
+                    pathname: "/persons",
+                    query: {
+                      personal_Id: person.personal_Id,
+                    },
+                  }}
+                  passHref
+                >
+                  {person.firstname} {person.lastname}
+                </Link>
+              );
             })}
           </StyledCardContentElement>
           <StyledCardContentElement>
             <StyledCardModuleList>
-              <StyledCardModuleListItem>Developers: </StyledCardModuleListItem>
+              <StyledCardModuleListItem>
+                <b>Developers: </b>
+              </StyledCardModuleListItem>
               {module.developer.map((dev) => {
                 const person = personsData.find(
                   (pers) => pers.personal_Id == dev
                 );
                 return (
                   <StyledCardModuleListItem key={person.personal_Id}>
-                    {person.firstname} {person.lastname}
+                    <Link
+                      key={person.personal_Id}
+                      href={{
+                        pathname: "/persons",
+                        query: {
+                          personal_Id: person.personal_Id,
+                        },
+                      }}
+                      passHref
+                    >
+                      {person.firstname} {person.lastname}
+                    </Link>
                   </StyledCardModuleListItem>
                 );
               })}
@@ -154,14 +235,27 @@ export default function ModuleInfo({
           </StyledCardContentElement>
           <StyledCardContentElement>
             <StyledCardModuleList>
-              <StyledCardModuleListItem>BPA: </StyledCardModuleListItem>
+              <StyledCardModuleListItem>
+                <b>BPA: </b>
+              </StyledCardModuleListItem>
               {module.bpa.map((bpa) => {
                 const person = personsData.find(
                   (pers) => pers.personal_Id == bpa
                 );
                 return (
                   <StyledCardModuleListItem key={person.personal_Id}>
-                    {person.firstname} {person.lastname}
+                    <Link
+                      key={person.personal_Id}
+                      href={{
+                        pathname: "/persons",
+                        query: {
+                          personal_Id: person.personal_Id,
+                        },
+                      }}
+                      passHref
+                    >
+                      {person.firstname} {person.lastname}
+                    </Link>
                   </StyledCardModuleListItem>
                 );
               })}

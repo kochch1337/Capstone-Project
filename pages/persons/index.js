@@ -18,68 +18,27 @@ export default function Persons({
   const router = useRouter();
   const query = router.query;
   const [showSnack, setShowSnack] = useState(false);
-  const solutionid = query.SolutionId;
-  const moduleName = query.Module;
+  const personal_Id = query.personal_Id;
 
-  const searchOptionsModule = {
-    includeScore: true,
-    includeMatches: true,
-    useExtendedSearch: true,
-    keys: ["developer", "bpa"],
-  };
+  let persons = [
+    ...personsData.sort((a, b) =>
+      a.lastname > b.lastname ? 1 : b.lastname > a.lastname ? -1 : 0
+    ),
+  ];
 
-  const searchOptionsSolutions = {
-    includeScore: true,
-    includeMatches: true,
-    useExtendedSearch: true,
-    keys: ["bpe", "bseint", "bsegr", "leadDeveloper", "cbo"],
-  };
-
-  let devs = personsData.filter((dev) => dev.role === "dev");
-  let bpas = personsData.filter((dev) => dev.role === "bc");
-
-  if (solutionid !== undefined && moduleName !== undefined) {
-    const solutionData = solutionsData.find(
-      (solution) => solution.solution_Id === solutionid
+  if (personal_Id != undefined) {
+    persons = personsData.filter(
+      (person) => person.personal_Id === personal_Id
     );
-
-    const moduleData = solutionData.modules.find(
-      (module) => module.module === moduleName
-    );
-    devs = moduleData.developer;
-  }
-
-  if (solutionid !== undefined && moduleName !== undefined) {
-    const solutionData = solutionsData.find(
-      (solution) => solution.solution_Id === solutionid
-    );
-
-    const moduleData = solutionData.modules.find(
-      (module) => module.module === moduleName
-    );
-    bpas = moduleData.bpa;
   }
 
   return (
     <>
-      <StyledHeader>Developers</StyledHeader>
+      <StyledHeader>
+        <b>Persons: </b>
+      </StyledHeader>
       <StyledListContainer>
-        {devs.map((person) => {
-          return (
-            <PersonInfo
-              key={person.personal_Id}
-              solutionsData={solutionsData}
-              modulesData={modulesData}
-              personsData={personsData}
-              person={person}
-              deletePerson={deletePerson}
-            ></PersonInfo>
-          );
-        })}
-      </StyledListContainer>
-      <StyledHeader>BPAs:</StyledHeader>
-      <StyledListContainer>
-        {bpas.map((person) => {
+        {persons.map((person) => {
           return (
             <PersonInfo
               key={person.personal_Id}

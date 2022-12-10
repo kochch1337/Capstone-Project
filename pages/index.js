@@ -12,12 +12,28 @@ export default function Solution({
   deleteSolution,
 }) {
   const router = useRouter();
+  const query = router.query;
+  const solution_Id = query.SolutionId;
+
+  let solutions = [...solutionsData];
+
+  solutions = [
+    ...solutions.sort((a, b) =>
+      a.solution > b.solution ? 1 : b.solution > a.solution ? -1 : 0
+    ),
+  ];
+
+  if (solution_Id != undefined) {
+    solutions = solutionsData.filter(
+      (solution) => solution.solution_Id === solution_Id
+    );
+  }
 
   return (
     <>
       <StyledHeader>Solutions</StyledHeader>
       <StyledListContainer>
-        {solutionsData.map((solution) => {
+        {solutions.map((solution) => {
           return (
             <SolutionInfo
               key={solution.solution_Id}
