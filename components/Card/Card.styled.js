@@ -24,6 +24,11 @@ const StyledCardContentElement = styled.div`
   border-bottom: 1px solid black;
 `;
 
+const StyledCardPersonElement = styled.div`
+  padding: 10px 20px;
+  gap: 20px;
+`;
+
 const StyledCardTitle = styled.h2`
   text-align: center;
 `;
@@ -36,6 +41,19 @@ const StyledCardModuleList = styled.ul`
 `;
 
 const StyledCardModuleListItem = styled.li`
+  display: inline-block;
+  padding: 0px 5px;
+  margin-left: -5px;
+`;
+
+const StyledCardPersonList = styled.ul`
+  text-align: justify;
+  padding: 0px;
+  display: inline-block;
+  justify-content: space-between;
+`;
+
+const StyledCardPersonListItem = styled.li`
   display: inline-block;
   padding: 0px 5px;
   margin-left: -5px;
@@ -60,4 +78,7 @@ export {
   StyledCardModuleListItem,
   StyledListContainer,
   StyledHeader,
+  StyledCardPersonElement,
+  StyledCardPersonList,
+  StyledCardPersonListItem,
 };

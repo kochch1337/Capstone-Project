@@ -1,9 +1,13 @@
 import { useRouter } from "next/router.js";
-import { StyledHeader } from "../../components/Card/Card.styled";
+import {
+  StyledHeader,
+  StyledListContainer,
+} from "../../components/Card/Card.styled";
 import ButtonNew from "../../components/Button";
 import Fuse from "fuse.js";
 import { useState } from "react";
 import SnackBar from "../../components/SnackBar";
+import PersonInfo from "../../components/PersonInfo/index.js";
 
 export default function Persons({
   solutionsData,
@@ -56,64 +60,38 @@ export default function Persons({
     bpas = moduleData.bpa;
   }
 
-  function editPerson(event) {
-    const personal_id = event.target.parentElement.id;
-
-    router.push({
-      pathname: "/createPerson",
-      query: { personal_Id: personal_id },
-    });
-  }
-
-  function removePerson(event) {
-    const personal_id = event.target.parentElement.id;
-    const fuse = new Fuse(modulesData, searchOptionsModule);
-    const solfuse = new Fuse(solutionsData, searchOptionsSolutions);
-    const solutionResult = solfuse.search(`=${personal_id}`);
-    const moduleResult = fuse.search(`=${personal_id}`);
-
-    if (solutionResult.length > 0 || moduleResult.length > 0) {
-      setShowSnack(true);
-    } else {
-      deletePerson(personal_id);
-    }
-  }
-
   return (
     <>
-      <StyledHeader>Persons</StyledHeader>
-      <ul>
-        Developers:
+      <StyledHeader>Developers</StyledHeader>
+      <StyledListContainer>
         {devs.map((person) => {
           return (
-            <li key={person.personal_Id} id={person.personal_Id}>
-              {person.firstname} {person.lastname}{" "}
-              <ButtonNew type="button" onClick={editPerson}>
-                Edit
-              </ButtonNew>
-              <ButtonNew type="button" onClick={removePerson}>
-                delete
-              </ButtonNew>
-            </li>
+            <PersonInfo
+              key={person.personal_Id}
+              solutionsData={solutionsData}
+              modulesData={modulesData}
+              personsData={personsData}
+              person={person}
+              deletePerson={deletePerson}
+            ></PersonInfo>
           );
         })}
-      </ul>
-      <ul>
-        BPAs:
+      </StyledListContainer>
+      <StyledHeader>BPAs:</StyledHeader>
+      <StyledListContainer>
         {bpas.map((person) => {
           return (
-            <li key={person.personal_Id} id={person.personal_Id}>
-              {person.firstname} {person.lastname}{" "}
-              <ButtonNew type="button" onClick={editPerson}>
-                Edit
-              </ButtonNew>
-              <ButtonNew type="button" onClick={removePerson}>
-                delete
-              </ButtonNew>
-            </li>
+            <PersonInfo
+              key={person.personal_Id}
+              solutionsData={solutionsData}
+              modulesData={modulesData}
+              personsData={personsData}
+              person={person}
+              deletePerson={deletePerson}
+            ></PersonInfo>
           );
         })}
-      </ul>
+      </StyledListContainer>
       {showSnack && (
         <SnackBar
           text={"Person still in use, abort deletion"}
