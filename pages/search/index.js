@@ -1,12 +1,9 @@
-import { useRouter } from "next/router.js";
 import { StyledHeader } from "../../components/Card/Card.styled";
 import { FormsBase } from "../../components/InputForm/InputForm.styled";
 import ButtonNew from "../../components/Button";
 import {
   StyledCard,
-  StyledCardContent,
   StyledCardContentElement,
-  StyledCardTitle,
   StyledCardModuleList,
   StyledCardModuleListItem,
 } from "../../components/Card/Card.styled";
@@ -15,8 +12,6 @@ import { useState } from "react";
 import Link from "next/link";
 
 export default function Solution({ solutionsData, modulesData, personsData }) {
-  const router = useRouter();
-
   const initialState = [];
   const [solutionMatch, setSolutionMatch] = useState(initialState);
   const [moduleMatch, setModuleMatch] = useState([]);
@@ -60,7 +55,10 @@ export default function Solution({ solutionsData, modulesData, personsData }) {
             const solution = solutionsData.find(
               (sol) => sol.solution_Id === result.item.solution_Id
             );
-            setSolutionMatch((oldValue) => [...oldValue, solution]);
+
+            if (!solutionMatch.includes(solution)) {
+              setSolutionMatch((oldValue) => [...oldValue, solution]);
+            }
           });
         });
       }
@@ -75,7 +73,10 @@ export default function Solution({ solutionsData, modulesData, personsData }) {
             const module = modulesData.find(
               (module) => module.module_Id === result.item.module_Id
             );
-            setModuleMatch((oldValue) => [...oldValue, module]);
+
+            if (moduleMatch.includes(module)) {
+              setModuleMatch((oldValue) => [...oldValue, module]);
+            }
           });
         });
       }
@@ -90,12 +91,12 @@ export default function Solution({ solutionsData, modulesData, personsData }) {
             const person = personsData.find(
               (person) => person.personal_Id === personal_Id
             );
-            setPersonMatch((oldValue) => [...oldValue, person]);
+
+            if (personMatch.includes(person)) {
+              setPersonMatch((oldValue) => [...oldValue, person]);
+            }
           });
         });
-
-        console.log("after PersonSearch");
-        console.log(personsData);
       }
     }
   }
@@ -151,7 +152,7 @@ export default function Solution({ solutionsData, modulesData, personsData }) {
                 });
 
                 return (
-                  <StyledCardModuleListItem key={match.module}>
+                  <StyledCardModuleListItem key={match.module_Id}>
                     <Link
                       href={{
                         pathname: "/modules",
@@ -180,7 +181,7 @@ export default function Solution({ solutionsData, modulesData, personsData }) {
         <StyledCard>
           <StyledCardContentElement>
             <StyledCardModuleList>
-              <StyledCardModuleListItem key="moduleList">
+              <StyledCardModuleListItem key="personList">
                 <b>Persons: </b>
               </StyledCardModuleListItem>
               {personMatch.map((match) => {
