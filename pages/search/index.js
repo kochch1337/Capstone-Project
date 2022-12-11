@@ -21,7 +21,16 @@ export default function Solution({ solutionsData, modulesData, personsData }) {
   const searchOptionsSolutions = {
     includeMatches: true,
     useExtendedSearch: true,
-    keys: ["bpe", "bseint", "bsegr", "leadDeveloper", "cbo", "solution"],
+    keys: [
+      "bpe",
+      "bseint",
+      "bsegr",
+      "leadDeveloper",
+      "cbo",
+      "solution",
+      "team",
+      "supportGroup",
+    ],
   };
 
   const searchOptionsModules = {
@@ -51,15 +60,13 @@ export default function Solution({ solutionsData, modulesData, personsData }) {
 
       if (solutionResult != undefined) {
         solutionResult.forEach((result) => {
-          result.matches.forEach((match) => {
-            const solution = solutionsData.find(
-              (sol) => sol.solution_Id === result.item.solution_Id
-            );
+          const solution = solutionsData.find(
+            (sol) => sol.solution_Id === result.item.solution_Id
+          );
 
-            if (!solutionMatch.includes(solution)) {
-              setSolutionMatch((oldValue) => [...oldValue, solution]);
-            }
-          });
+          if (!solutionMatch.includes(solution)) {
+            setSolutionMatch((oldValue) => [...oldValue, solution]);
+          }
         });
       }
 
@@ -69,15 +76,13 @@ export default function Solution({ solutionsData, modulesData, personsData }) {
 
       if (modulesResult != undefined) {
         modulesResult.forEach((result) => {
-          result.matches.forEach((match) => {
-            const module = modulesData.find(
-              (module) => module.module_Id === result.item.module_Id
-            );
+          const module = modulesData.find(
+            (module) => module.module_Id === result.item.module_Id
+          );
 
-            if (moduleMatch.includes(module)) {
-              setModuleMatch((oldValue) => [...oldValue, module]);
-            }
-          });
+          if (!moduleMatch.includes(module)) {
+            setModuleMatch((oldValue) => [...oldValue, module]);
+          }
         });
       }
 
@@ -86,16 +91,14 @@ export default function Solution({ solutionsData, modulesData, personsData }) {
 
       if (personResult != undefined) {
         personResult.forEach((result) => {
-          result.matches.forEach((match) => {
-            const personal_Id = result.item.personal_Id;
-            const person = personsData.find(
-              (person) => person.personal_Id === personal_Id
-            );
+          const personal_Id = result.item.personal_Id;
+          const person = personsData.find(
+            (person) => person.personal_Id === personal_Id
+          );
 
-            if (personMatch.includes(person)) {
-              setPersonMatch((oldValue) => [...oldValue, person]);
-            }
-          });
+          if (!personMatch.includes(person)) {
+            setPersonMatch((oldValue) => [...oldValue, person]);
+          }
         });
       }
     }
