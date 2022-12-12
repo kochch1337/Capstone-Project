@@ -66,9 +66,10 @@ export default function ModuleInfo({
   return (
     <>
       <StyledCard key={module.module_Id} id={module.module_Id}>
-        <StyledCardContent>
-          <StyledCardTitle>
+        <StyledCardContent aria-label="Module details">
+          <StyledCardTitle aria-label="Module title">
             <Link
+              aria-label="Link to solution"
               href={{
                 pathname: "/",
                 query: {
@@ -81,21 +82,31 @@ export default function ModuleInfo({
             </Link>
             - {module.module}
           </StyledCardTitle>
-          <ButtonNew type="button" variant="edit" onClick={editModule}>
+          <ButtonNew
+            type="button"
+            variant="edit"
+            onClick={editModule}
+            aria-label="Edit module button"
+          >
             Edit
           </ButtonNew>
-          <ButtonNew type="button" variant="delete" onClick={removeModule}>
+          <ButtonNew
+            type="button"
+            variant="delete"
+            onClick={removeModule}
+            aria-label="Delete module button"
+          >
             Delete
           </ButtonNew>
         </StyledCardContent>
         <StyledCardContent>
-          <StyledCardContentElement>
+          <StyledCardContentElement aria-label="Module team">
             Team: {solution.team}
           </StyledCardContentElement>
-          <StyledCardContentElement>
+          <StyledCardContentElement aria-label="Module support group">
             SupportGroup: {solution.supportGroup}
           </StyledCardContentElement>
-          <StyledCardContentElement>
+          <StyledCardContentElement aria-label="Module BPE">
             <b>BPE: </b>
             {solution.bpe.map((personalid) => {
               const person = personsData.find(
@@ -103,6 +114,7 @@ export default function ModuleInfo({
               );
               return (
                 <Link
+                  aria-label="Link to BPE"
                   key={personalid}
                   href={{
                     pathname: "/persons",
@@ -117,7 +129,7 @@ export default function ModuleInfo({
               );
             })}
           </StyledCardContentElement>
-          <StyledCardContentElement>
+          <StyledCardContentElement aria-label="Module BSEINT">
             BSEINT:{" "}
             {solution.bseint.map((personalid) => {
               const person = personsData.find(
@@ -125,6 +137,7 @@ export default function ModuleInfo({
               );
               return (
                 <Link
+                  aria-label="Link to BSEINT"
                   key={personalid}
                   href={{
                     pathname: "/persons",
@@ -139,7 +152,7 @@ export default function ModuleInfo({
               );
             })}
           </StyledCardContentElement>
-          <StyledCardContentElement>
+          <StyledCardContentElement aria-label="Module BSEGR">
             BSEGR:{" "}
             {solution.bsegr.map((personalid) => {
               const person = personsData.find(
@@ -147,6 +160,7 @@ export default function ModuleInfo({
               );
               return (
                 <Link
+                  aria-label="Link to BSEGR"
                   key={personalid}
                   href={{
                     pathname: "/persons",
@@ -161,7 +175,7 @@ export default function ModuleInfo({
               );
             })}
           </StyledCardContentElement>
-          <StyledCardContentElement>
+          <StyledCardContentElement aria-label="Module lead developer">
             Lead Developer:{" "}
             {solution.leadDeveloper.map((personalid) => {
               const person = personsData.find(
@@ -169,6 +183,7 @@ export default function ModuleInfo({
               );
               return (
                 <Link
+                  aria-label="Link to lead developer"
                   key={personalid}
                   href={{
                     pathname: "/persons",
@@ -183,7 +198,7 @@ export default function ModuleInfo({
               );
             })}
           </StyledCardContentElement>
-          <StyledCardContentElement>
+          <StyledCardContentElement aria-label="Module CBO">
             CBO:{" "}
             {solution.cbo.map((personalid) => {
               const person = personsData.find(
@@ -191,6 +206,7 @@ export default function ModuleInfo({
               );
               return (
                 <Link
+                  aria-label="Link to CBO"
                   key={personalid}
                   href={{
                     pathname: "/persons",
@@ -206,8 +222,8 @@ export default function ModuleInfo({
             })}
           </StyledCardContentElement>
           <StyledCardContentElement>
-            <StyledCardModuleList>
-              <StyledCardModuleListItem>
+            <StyledCardModuleList aria-label="Module developers list">
+              <StyledCardModuleListItem aria-label="Module developers headline">
                 <b>Developers: </b>
               </StyledCardModuleListItem>
               {module.developer.map((dev) => {
@@ -215,8 +231,12 @@ export default function ModuleInfo({
                   (pers) => pers.personal_Id == dev
                 );
                 return (
-                  <StyledCardModuleListItem key={person.personal_Id}>
+                  <StyledCardModuleListItem
+                    key={person.personal_Id}
+                    aria-label="Module developer"
+                  >
                     <Link
+                      aria-label="Link to module developer"
                       key={person.personal_Id}
                       href={{
                         pathname: "/persons",
@@ -234,8 +254,8 @@ export default function ModuleInfo({
             </StyledCardModuleList>
           </StyledCardContentElement>
           <StyledCardContentElement>
-            <StyledCardModuleList>
-              <StyledCardModuleListItem>
+            <StyledCardModuleList aria-label="Module bpa list">
+              <StyledCardModuleListItem aria-label="Module bpa headline">
                 <b>BPA: </b>
               </StyledCardModuleListItem>
               {module.bpa.map((bpa) => {
@@ -243,8 +263,12 @@ export default function ModuleInfo({
                   (pers) => pers.personal_Id == bpa
                 );
                 return (
-                  <StyledCardModuleListItem key={person.personal_Id}>
+                  <StyledCardModuleListItem
+                    key={person.personal_Id}
+                    aria-label="Module bpa"
+                  >
                     <Link
+                      aria-label="Link to module bpa"
                       key={person.personal_Id}
                       href={{
                         pathname: "/persons",

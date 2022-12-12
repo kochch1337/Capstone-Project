@@ -31,8 +31,8 @@ export default function Solution({
 
   return (
     <>
-      <StyledHeader>Solutions</StyledHeader>
-      <StyledListContainer>
+      <StyledHeader aria-label="Headline">Solutions</StyledHeader>
+      <StyledListContainer aria-label="List of Solutions">
         {solutions.map((solution) => {
           return (
             <SolutionInfo
