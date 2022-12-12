@@ -48,10 +48,11 @@ export default function SolutionInfo({
   return (
     <>
       <StyledCard key={solution.solution_Id} id={solution.solution_Id}>
-        <StyledCardContent>
-          <StyledCardTitle>
+        <StyledCardContent aria-label="Solution details">
+          <StyledCardTitle aria-label="Solution title">
             {solution.modules.length > 0 && (
               <Link
+                aria-label="Link to solution"
                 href={{
                   pathname: "/modules",
                   query: {
@@ -65,69 +66,148 @@ export default function SolutionInfo({
             )}
             {solution.modules.length === 0 && solution.solution}
           </StyledCardTitle>
-          <ButtonNew type="button" variant="edit" onClick={editSolution}>
+          <ButtonNew
+            aria-label="Edit solution button"
+            type="button"
+            variant="edit"
+            onClick={editSolution}
+          >
             Edit
           </ButtonNew>
-          <ButtonNew type="button" variant="delete" onClick={removeSolution}>
+          <ButtonNew
+            aria-label="Delete solution button"
+            type="button"
+            variant="delete"
+            onClick={removeSolution}
+          >
             Delete
           </ButtonNew>
         </StyledCardContent>
-
         <StyledCardContent>
-          <StyledCardContentElement>
+          <StyledCardContentElement aria-label="Solution team">
             <b>Team: </b>
             {solution.team}
           </StyledCardContentElement>
-          <StyledCardContentElement>
+          <StyledCardContentElement aria-label="Solution support group">
             <b>SupportGroup: </b>
             {solution.supportGroup}
           </StyledCardContentElement>
-          <StyledCardContentElement>
+          <StyledCardContentElement aria-label="Solution BPE">
             <b>BPE: </b>
             {solution.bpe.map((personalid) => {
               const person = personsData.find(
                 (pers) => pers.personal_Id == personalid
               );
-              return ` ${person.firstname} ${person.lastname}`;
+              return (
+                <Link
+                  aria-label="Link to BPE"
+                  key={personalid}
+                  href={{
+                    pathname: "/persons",
+                    query: {
+                      personal_Id: personalid,
+                    },
+                  }}
+                  passHref
+                >
+                  {person.firstname} {person.lastname}
+                </Link>
+              );
             })}
           </StyledCardContentElement>
-          <StyledCardContentElement>
+          <StyledCardContentElement aria-label="Solution BSEINT">
             <b>BSEINT: </b>
             {solution.bseint.map((personalid) => {
               const person = personsData.find(
                 (pers) => pers.personal_Id == personalid
               );
-              return `${person.firstname} ${person.lastname}`;
+              return (
+                <Link
+                  aria-label="Link to BSEINT"
+                  key={personalid}
+                  href={{
+                    pathname: "/persons",
+                    query: {
+                      personal_Id: personalid,
+                    },
+                  }}
+                  passHref
+                >
+                  {person.firstname} {person.lastname}
+                </Link>
+              );
             })}
           </StyledCardContentElement>
-          <StyledCardContentElement>
+          <StyledCardContentElement aria-label="Solution BSEGR">
             <b>BSEGR: </b>
             {solution.bsegr.map((personalid) => {
               const person = personsData.find(
                 (pers) => pers.personal_Id == personalid
               );
-              return `${person.firstname} ${person.lastname}`;
+              return (
+                <Link
+                  aria-label="Link to BSEGR"
+                  key={personalid}
+                  href={{
+                    pathname: "/persons",
+                    query: {
+                      personal_Id: personalid,
+                    },
+                  }}
+                  passHref
+                >
+                  {person.firstname} {person.lastname}
+                </Link>
+              );
             })}
           </StyledCardContentElement>
-          <StyledCardContentElement>
+          <StyledCardContentElement aria-label="Solution lead developer">
             <b>Lead Developer: </b>
             {solution.leadDeveloper.map((personalid) => {
               const person = personsData.find(
                 (pers) => pers.personal_Id == personalid
               );
-              return `${person.firstname} ${person.lastname}`;
+              return (
+                <Link
+                  aria-label="Link to lead developer"
+                  key={personalid}
+                  href={{
+                    pathname: "/persons",
+                    query: {
+                      personal_Id: personalid,
+                    },
+                  }}
+                  passHref
+                >
+                  {person.firstname} {person.lastname}
+                </Link>
+              );
             })}
           </StyledCardContentElement>
-          <StyledCardContentElement>
+          <StyledCardContentElement aria-label="Solution CBO">
             <b>CBO: </b>
             {solution.cbo.map((personalid) => {
               const person = personsData.find(
                 (pers) => pers.personal_Id == personalid
               );
-              return `${person.firstname} ${person.lastname}`;
+              return (
+                <Link
+                  aria-label="Link to CBO"
+                  key={personalid}
+                  href={{
+                    pathname: "/persons",
+                    query: {
+                      personal_Id: personalid,
+                    },
+                  }}
+                  passHref
+                >
+                  {person.firstname} {person.lastname}
+                </Link>
+              );
             })}
           </StyledCardContentElement>
-          <StyledCardContentElement>
+          <StyledCardContentElement aria-label="Solution modules list">
             <StyledCardModuleList>
               <b>Modules:</b>
               {solution.modules.map((moduleid) => {
@@ -135,8 +215,13 @@ export default function SolutionInfo({
                   (moduledata) => moduledata.module_Id === moduleid
                 );
                 return (
-                  <StyledCardModuleListItem key={module.module}>
+                  <StyledCardModuleListItem
+                    key={module.module}
+                    aria-label="Solution module item"
+                  >
                     <Link
+                      aria-label="Link to module"
+                      key={module.module_Id}
                       href={{
                         pathname: "/modules",
                         query: {

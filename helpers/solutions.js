@@ -3,7 +3,7 @@ const solutions = [
     solution_Id: "1",
     solution: "Einkauf",
     team: "AA",
-    bpe: ["9", "10"],
+    bpe: ["9"],
     bseint: ["10"],
     bsegr: ["11"],
     leadDeveloper: ["12"],

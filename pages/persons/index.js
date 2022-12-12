@@ -1,9 +1,13 @@
 import { useRouter } from "next/router.js";
-import { StyledHeader } from "../../components/Card/Card.styled";
+import {
+  StyledHeader,
+  StyledListContainer,
+} from "../../components/Card/Card.styled";
 import ButtonNew from "../../components/Button";
 import Fuse from "fuse.js";
 import { useState } from "react";
 import SnackBar from "../../components/SnackBar";
+import PersonInfo from "../../components/PersonInfo/index.js";
 
 export default function Persons({
   solutionsData,
@@ -14,106 +18,39 @@ export default function Persons({
   const router = useRouter();
   const query = router.query;
   const [showSnack, setShowSnack] = useState(false);
-  const solutionid = query.SolutionId;
-  const moduleName = query.Module;
+  const personal_Id = query.personal_Id;
 
-  const searchOptionsModule = {
-    includeScore: true,
-    includeMatches: true,
-    useExtendedSearch: true,
-    keys: ["developer", "bpa"],
-  };
+  let persons = [
+    ...personsData.sort((a, b) =>
+      a.lastname > b.lastname ? 1 : b.lastname > a.lastname ? -1 : 0
+    ),
+  ];
 
-  const searchOptionsSolutions = {
-    includeScore: true,
-    includeMatches: true,
-    useExtendedSearch: true,
-    keys: ["bpe", "bseint", "bsegr", "leadDeveloper", "cbo"],
-  };
-
-  let devs = personsData.filter((dev) => dev.role === "dev");
-  let bpas = personsData.filter((dev) => dev.role === "bc");
-
-  if (solutionid !== undefined && moduleName !== undefined) {
-    const solutionData = solutionsData.find(
-      (solution) => solution.solution_Id === solutionid
+  if (personal_Id != undefined) {
+    persons = personsData.filter(
+      (person) => person.personal_Id === personal_Id
     );
-
-    const moduleData = solutionData.modules.find(
-      (module) => module.module === moduleName
-    );
-    devs = moduleData.developer;
-  }
-
-  if (solutionid !== undefined && moduleName !== undefined) {
-    const solutionData = solutionsData.find(
-      (solution) => solution.solution_Id === solutionid
-    );
-
-    const moduleData = solutionData.modules.find(
-      (module) => module.module === moduleName
-    );
-    bpas = moduleData.bpa;
-  }
-
-  function editPerson(event) {
-    const personal_id = event.target.parentElement.id;
-
-    router.push({
-      pathname: "/createPerson",
-      query: { personal_Id: personal_id },
-    });
-  }
-
-  function removePerson(event) {
-    const personal_id = event.target.parentElement.id;
-    const fuse = new Fuse(modulesData, searchOptionsModule);
-    const solfuse = new Fuse(solutionsData, searchOptionsSolutions);
-    const solutionResult = solfuse.search(`=${personal_id}`);
-    const moduleResult = fuse.search(`=${personal_id}`);
-
-    if (solutionResult.length > 0 || moduleResult.length > 0) {
-      setShowSnack(true);
-    } else {
-      deletePerson(personal_id);
-    }
   }
 
   return (
     <>
-      <StyledHeader>Persons</StyledHeader>
-      <ul>
-        Developers:
-        {devs.map((person) => {
+      <StyledHeader aria-label="Headline" r>
+        <b>Persons: </b>
+      </StyledHeader>
+      <StyledListContainer aria-label="List of persons">
+        {persons.map((person) => {
           return (
-            <li key={person.personal_Id} id={person.personal_Id}>
-              {person.firstname} {person.lastname}{" "}
-              <ButtonNew type="button" onClick={editPerson}>
-                Edit
-              </ButtonNew>
-              <ButtonNew type="button" onClick={removePerson}>
-                delete
-              </ButtonNew>
-            </li>
+            <PersonInfo
+              key={person.personal_Id}
+              solutionsData={solutionsData}
+              modulesData={modulesData}
+              personsData={personsData}
+              person={person}
+              deletePerson={deletePerson}
+            ></PersonInfo>
           );
         })}
-      </ul>
-      <ul>
-        BPAs:
-        {bpas.map((person) => {
-          return (
-            <li key={person.personal_Id} id={person.personal_Id}>
-              {person.firstname} {person.lastname}{" "}
-              <ButtonNew type="button" onClick={editPerson}>
-                Edit
-              </ButtonNew>
-              <ButtonNew type="button" onClick={removePerson}>
-                delete
-              </ButtonNew>
-            </li>
-          );
-        })}
-      </ul>
+      </StyledListContainer>
       {showSnack && (
         <SnackBar
           text={"Person still in use, abort deletion"}

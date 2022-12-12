@@ -40,8 +40,8 @@ export default function Modules({
 
   return (
     <>
-      <StyledHeader>Modules</StyledHeader>
-      <StyledListContainer>
+      <StyledHeader aria-label="Headline">Modules</StyledHeader>
+      <StyledListContainer aria-label="List of modules">
         {data.map((solution) => {
           return solution.modules.map((moduleId) => {
             const module = modulesData.find(

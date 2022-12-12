@@ -47,6 +47,15 @@ export default function NavFooter() {
               +
             </StyledNavLink>
           </StyledNavigationListItem>
+          <StyledNavigationListItem>
+            <StyledNavLink
+              href="/search"
+              passHref
+              active={pathname === "/search" ? 1 : 0}
+            >
+              search
+            </StyledNavLink>
+          </StyledNavigationListItem>
         </StyledNavigationList>
       </StyledNav>
     </StyledFooter>
