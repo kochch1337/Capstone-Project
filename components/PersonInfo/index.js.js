@@ -110,15 +110,22 @@ export default function PersonInfo({
   function DeveloperList() {
     if (modulesAsDeveloper.length > 0) {
       return (
-        <StyledCardPersonElement>
-          <StyledCardPersonList>
-            <StyledCardPersonListItem key="devList">
+        <StyledCardPersonElement aria-label="Devloper overview">
+          <StyledCardPersonList aria-label="List of modules as devloper">
+            <StyledCardPersonListItem
+              key="devList"
+              aria-label="Devloper headline item"
+            >
               <b>Developer for: </b>
             </StyledCardPersonListItem>
             {modulesAsDeveloper.map((module) => {
               return (
-                <StyledCardPersonListItem key={module.module_Id}>
+                <StyledCardPersonListItem
+                  key={module.module_Id}
+                  aria-label="Devloper for module"
+                >
                   <Link
+                    aria-label="Link to module"
                     href={{
                       pathname: "/modules",
                       query: {
@@ -142,15 +149,22 @@ export default function PersonInfo({
   function BpaList() {
     if (modulesAsBpa.length > 0) {
       return (
-        <StyledCardPersonElement>
-          <StyledCardPersonList>
-            <StyledCardPersonListItem key="bpaList">
+        <StyledCardPersonElement aria-label="BPA overview">
+          <StyledCardPersonList aria-label="List of modules as bpa">
+            <StyledCardPersonListItem
+              key="bpaList"
+              aria-label="BPA headline item"
+            >
               <b>BPA for:</b>
             </StyledCardPersonListItem>
             {modulesAsBpa.map((module) => {
               return (
-                <StyledCardPersonListItem key={module.module_Id}>
+                <StyledCardPersonListItem
+                  key={module.module_Id}
+                  aria-label="BPA for module"
+                >
                   <Link
+                    aria-label="Link to bpa"
                     href={{
                       pathname: "/modules",
                       query: {
@@ -174,15 +188,19 @@ export default function PersonInfo({
   function SolutionList() {
     if (solutionsOverview.length > 0) {
       return (
-        <StyledCardPersonElement>
-          <StyledCardPersonList>
+        <StyledCardPersonElement aria-label="Solution overview">
+          <StyledCardPersonList aria-label="List of solutions">
             {solutionsOverview.map((solObj) => {
               return (
                 <div
                   key={person.personal_Id + "_" + solObj.solution.solution_Id}
                 >
-                  <StyledCardPersonListItem key={solObj.solution.solution_Id}>
+                  <StyledCardPersonListItem
+                    key={solObj.solution.solution_Id}
+                    aria-label="Person in solution"
+                  >
                     <Link
+                      aria-label="Link to solution"
                       href={{
                         pathname: "/",
                         query: {
@@ -197,6 +215,7 @@ export default function PersonInfo({
                   {solObj.roles.map((role) => {
                     return (
                       <StyledCardPersonListItem
+                        aria-label="Role in solution"
                         key={person.personal_Id + "_" + role}
                       >
                         {role}
@@ -214,18 +233,34 @@ export default function PersonInfo({
 
   return (
     <>
-      <StyledCard key={person.personal_Id} id={person.personal_Id}>
+      <StyledCard
+        key={person.personal_Id}
+        id={person.personal_Id}
+        aria-label="Person overview"
+      >
         <StyledCardContent>
-          <ButtonNew type="button" variant="edit" onClick={editPerson}>
+          <ButtonNew
+            type="button"
+            variant="edit"
+            onClick={editPerson}
+            aria-label="Edit person button"
+          >
             Edit
           </ButtonNew>
-          <ButtonNew type="button" variant="delete" onClick={removePerson}>
+          <ButtonNew
+            type="button"
+            variant="delete"
+            onClick={removePerson}
+            aria-label="Delete person button"
+          >
             Delete
           </ButtonNew>
         </StyledCardContent>
-        <StyledCardContent>{person.role}</StyledCardContent>
+        <StyledCardContent aria-label="Person role">
+          {person.role}
+        </StyledCardContent>
         <StyledCardContent>
-          <StyledCardTitle>
+          <StyledCardTitle aria-label="Person name">
             {person.firstname} {person.lastname}
           </StyledCardTitle>
         </StyledCardContent>

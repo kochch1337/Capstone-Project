@@ -34,10 +34,10 @@ export default function Persons({
 
   return (
     <>
-      <StyledHeader>
+      <StyledHeade aria-label="Headline" r>
         <b>Persons: </b>
-      </StyledHeader>
-      <StyledListContainer>
+      </StyledHeade>
+      <StyledListContainer aria-label="List of persons">
         {persons.map((person) => {
           return (
             <PersonInfo
