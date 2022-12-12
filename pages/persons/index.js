@@ -34,9 +34,9 @@ export default function Persons({
 
   return (
     <>
-      <StyledHeade aria-label="Headline" r>
+      <StyledHeader aria-label="Headline" r>
         <b>Persons: </b>
-      </StyledHeade>
+      </StyledHeader>
       <StyledListContainer aria-label="List of persons">
         {persons.map((person) => {
           return (
